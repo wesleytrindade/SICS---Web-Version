@@ -1,0 +1,62 @@
+﻿@model SICS___WEB_2._0.ViewModels.LoginViewModel
+
+
+
+
+<!DOCTYPE html>
+
+<link href="@Url.Content("~/css/AuthStyle.css")" rel="stylesheet">
+<link href="@Url.Content("~/css/bootstrap.css")" rel="stylesheet">
+<link href="@Url.Content("~/css/bootstrap.min.css")" rel="stylesheet">
+
+
+
+<body id="LoginForm">
+    <div class="container">
+        <div class="login-form">
+            <div class="main-div">
+                <div class="panel">
+                    <h2>SICS - SISTEMA INTEGRADO DE CONTROLE DE SUBSTÂNCIAS</h2>
+                </div>
+
+                @using (Html.BeginForm("Login", "Auth", FormMethod.Post))
+
+                {
+
+                    @Html.ValidationSummary(true)
+
+                    @Html.TextBoxFor(a => a.Username, htmlAttributes: new
+
+               {
+                   @class = "form-control",
+                   @placeholder = "Login",
+               })
+
+                    @Html.ValidationMessageFor(a => a.Username, "", htmlAttributes: new { @class = "text-danger" });
+
+                    <br />
+
+                    @Html.PasswordFor(a => a.Password,
+           htmlAttributes: new
+
+           {
+               @class = "form-control",
+               @placeholder = "Senha",
+           })
+
+                    <br />
+
+                    @Html.ValidationMessageFor(a => a.Password, "", htmlAttributes: new { @class = "text-danger" });
+
+
+
+                    <br />
+                    <button type="submit" class="btn btn-primary"> Entrar</button>
+                }
+
+            </div>
+        </div>
+    </div>
+
+
+</body>
