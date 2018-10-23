@@ -10,9 +10,9 @@ namespace SICS___WEB_2._0.Models
     {
         [Key]
         public int ID { get; set; }
+        [Required(AllowEmptyStrings = false)]
         public int Funcionario { get; set; }
-        public String Username { get; set; }
-        public String Password { get; set; }
+        [Required(AllowEmptyStrings = false)]
         public String Role { get; set; }
     }
 }

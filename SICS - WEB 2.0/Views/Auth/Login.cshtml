@@ -1,4 +1,4 @@
-﻿@model SICS___WEB_2._0.ViewModels.LoginViewModel
+﻿@model SICS___WEB_2._0.Models.ViewModels.LoginViewModel
 
 
 
@@ -10,7 +10,11 @@
 <link href="@Url.Content("~/css/bootstrap.min.css")" rel="stylesheet">
 
 
+<div class="modal" id="modalconecta">
 
+    <p>@ViewBag.Status</p>
+
+</div>
 <body id="LoginForm">
     <div class="container">
         <div class="login-form">
@@ -51,6 +55,8 @@
 
 
                     <br />
+
+                    <div>@Html.CheckBoxFor(a => a.Lembrar,"")Lembrar-me</div> 
                     <button type="submit" class="btn btn-primary"> Entrar</button>
                 }
 
@@ -59,4 +65,9 @@
     </div>
 
 
+   
+    
+
+
+   
 </body>

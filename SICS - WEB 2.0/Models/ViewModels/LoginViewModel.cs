@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 
-namespace SICS___WEB_2._0.ViewModels
+namespace SICS___WEB_2._0.Models.ViewModels
 {
     public class LoginViewModel
     {

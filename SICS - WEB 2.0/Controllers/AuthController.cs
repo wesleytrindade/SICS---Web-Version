@@ -4,12 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using SICS___WEB_2._0.ViewModels;
+using SICS___WEB_2._0.Models.ViewModels;
+using SICS___WEB_2._0.Models.DAO;
+using SICS___WEB_2._0.Models;
 
 namespace SICS___WEB_2._0.Controllers
 {
+    
+
     public class AuthController : Controller
     {
+        LoginDAO loginDAO;
+
         [AllowAnonymous]
         public ActionResult Login()
         {
@@ -21,6 +27,10 @@ namespace SICS___WEB_2._0.Controllers
 
         public ActionResult Login (LoginViewModel lg,string returnURl)
         {
+            Connection ld = new Connection();
+            loginDAO = new LoginDAO();
+            ld.conecta();
+            
             if(!ModelState.IsValid)
             {
                 return View(lg);
@@ -28,16 +38,27 @@ namespace SICS___WEB_2._0.Controllers
 
             else
             {
-                FormsAuthentication.SetAuthCookie(lg.Username, false);
-                if(Url.IsLocalUrl(returnURl))
+                Login lb = loginDAO.AutenticaUsuario(lg.Username, lg.Password);
+                if (lb != null)
                 {
-                   return Redirect(returnURl);
+                    FormsAuthentication.SetAuthCookie(lg.Username, false);
+                    if (Url.IsLocalUrl(returnURl))
+                    {
+                        return Redirect(returnURl);
+                    }
+
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
 
                 else
                 {
-                    return RedirectToAction("Index", "Home");
+                    return View(lg);
                 }
+
+                
             }
 
            

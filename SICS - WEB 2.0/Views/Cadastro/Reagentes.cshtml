@@ -1,0 +1,78 @@
+﻿@model SICS___WEB_2._0.Models.ViewModels.CadastroReagenteViewModel
+
+@{
+    ViewBag.Title = "SICS- Cadastro de Reagentes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CadastroReagentes</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>CadastroReagenteViewModel</h4>
+    <hr />
+    @Html.ValidationSummary(true)
+    <div class="form-group">
+        @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Nome)
+            @Html.ValidationMessageFor(model => model.Nome)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CAS, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CAS)
+            @Html.ValidationMessageFor(model => model.CAS)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Teor, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Teor)
+            @Html.ValidationMessageFor(model => model.Teor)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Formula, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Formula)
+            @Html.ValidationMessageFor(model => model.Formula)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Controlado, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.CheckBoxFor(model => model.Controlado)
+            @Html.ValidationMessageFor(model => model.Controlado)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.OrgaoRegulador, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.OrgaoRegulador,Model.OrgaoRegulador,"Selecione Um")
+            @Html.ValidationMessageFor(model => model.OrgaoRegulador)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Cadastrar" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+}
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
