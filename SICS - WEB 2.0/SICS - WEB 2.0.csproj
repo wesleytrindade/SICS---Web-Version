@@ -172,6 +172,7 @@
     </Compile>
     <Compile Include="Models\DAO\Connection.cs" />
     <Compile Include="Models\DAO\GrupoDAO.cs" />
+    <Compile Include="Models\DAO\OrgaoDAO.cs" />
     <Compile Include="Models\DAO\ReagenteDAO.cs" />
     <Compile Include="Models\DAO\FabricanteDAO.cs" />
     <Compile Include="Models\DAO\FuncionarioDAO.cs" />
@@ -205,6 +206,7 @@
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\carousel.css" />
+    <Content Include="css\FormsCSS.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -230,6 +232,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Cadastro\Usuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,93 @@
+﻿@model SICS___WEB_2._0.Models.ViewModels.CadastroUsuariosViewModel
+
+@{
+    ViewBag.Title = "SICS - Cadastrar Usuário";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <div class="featurette-divider" id="divisor">
+
+        <h2 style="color:white"> Cadastro de Usuários</h2>
+    </div>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" id="formulario">
+
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Matricula, htmlAttributes: new { @class = "control-label col-md-2",@id = "labelform" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Matricula)
+                @Html.ValidationMessageFor(model => model.Matricula)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nome)
+                @Html.ValidationMessageFor(model => model.Nome)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Login, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Login)
+                @Html.ValidationMessageFor(model => model.Login)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PasswordConfirm, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PasswordConfirm)
+                @Html.ValidationMessageFor(model => model.PasswordConfirm)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SelectedRole, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.SelectedRole, Model.listRoles)
+                @Html.ValidationMessageFor(model => model.SelectedRole)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Subject)
+                @Html.ValidationMessageFor(model => model.Subject)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Cadastrar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+   
+}
+
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

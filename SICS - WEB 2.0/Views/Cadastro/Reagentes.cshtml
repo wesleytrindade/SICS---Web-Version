@@ -57,10 +57,10 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.OrgaoRegulador, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.OrgaoSelecionado, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.OrgaoRegulador,Model.OrgaoRegulador,"Selecione Um")
-            @Html.ValidationMessageFor(model => model.OrgaoRegulador)
+            @Html.DropDownListFor(model => model.OrgaoSelecionado, Model.listOrgao))
+            @Html.ValidationMessageFor(model => model.OrgaoSelecionado)
         </div>
     </div>
 

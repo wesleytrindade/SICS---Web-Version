@@ -1,0 +1,24 @@
+﻿
+#labelform
+{
+    font-family: Arial;
+
+}
+
+#formulario {
+    padding-left: 300px;
+    border: 3px dotted gray;
+    background-color:whitesmoke;
+}
+#divisor
+{
+    padding-right: 500px;
+    padding-top:10px;
+    padding-left:500px;
+    
+}
+
+.form-group
+{
+    padding-top:20px;
+}
