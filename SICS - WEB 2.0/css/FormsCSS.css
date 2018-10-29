@@ -1,4 +1,9 @@
 ﻿
+#btnsair
+{
+    padding-left:700px;
+}
+
 #labelform
 {
     font-family: Arial;
@@ -7,7 +12,7 @@
 
 #formulario {
     padding-left: 300px;
-    border: 3px dotted gray;
+    border: 3px dotted red;
     background-color:whitesmoke;
 }
 #divisor

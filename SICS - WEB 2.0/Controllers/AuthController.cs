@@ -41,7 +41,7 @@ namespace SICS___WEB_2._0.Controllers
                 Login lb = loginDAO.AutenticaUsuario(lg.Username, lg.Password);
                 if (lb != null)
                 {
-                    FormsAuthentication.SetAuthCookie(lg.Username, false);
+                    FormsAuthentication.SetAuthCookie(lg.Username, lg.Lembrar);
                     if (Url.IsLocalUrl(returnURl))
                     {
                         return Redirect(returnURl);
@@ -55,13 +55,20 @@ namespace SICS___WEB_2._0.Controllers
 
                 else
                 {
+                    lg.invalidCredentials = true;
                     return View(lg);
                 }
 
                 
             }
-
+        
            
+        }
+
+        public void Logout()
+        {
+            FormsAuthentication.SignOut();
+            RedirectToAction("Login");
         }
     }
 }

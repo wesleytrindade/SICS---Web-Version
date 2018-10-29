@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SICS___WEB_2._0.Models;
+using SICS___WEB_2._0.Models.ViewModels;
+
 
 namespace SICS___WEB_2._0.Controllers
 {
@@ -12,6 +14,7 @@ namespace SICS___WEB_2._0.Controllers
     {
         Models.DAO.GrupoDAO gDAO;
         Models.DAO.OrgaoDAO oDAO;
+        Models.DAO.FuncionarioDAO fDAO;
         Models.DAO.Connection con;
 
         [Authorize]
@@ -39,22 +42,21 @@ namespace SICS___WEB_2._0.Controllers
             }
 
             DataTable dp = oDAO.select();
-            List<Orgao> la = new List<Orgao>();
+            List<SelectListItem> la = new List<SelectListItem>();
             foreach (DataRow item in dp.Rows)
             {
-                Orgao gr = new Orgao();
-                gr.ID = Convert.ToInt32(item["id_orgao"]);
-                gr.Nome = item["desc_orgao"].ToString();
+                SelectListItem gr = new SelectListItem();
+                gr.Value = item["id_orgao"].ToString();
+                gr.Text = item["desc_orgao"].ToString();
                 la.Add(gr);
 
             }
-            vmodel.Grupo = new SelectList(ls);
-            vmodel._itemOrgao = new List<Orgao>();
-            vmodel._itemOrgao = la;
+            vmodel.Grupo = ls;
+            vmodel.listOrgao = la;
             
            
         
-            return View();
+            return View(vmodel);
         }
 
         [Authorize]
@@ -109,6 +111,65 @@ namespace SICS___WEB_2._0.Controllers
 
 
             return View(vumodel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public ActionResult Usuario(CadastroUsuariosViewModel vm)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(vm);
+            }
+
+            else
+            {
+                int role = 671;
+                if(vm.SelectedRole <3)
+                {
+                    vm.Subject = "";
+
+                    switch(vm.SelectedRole)
+                    {
+                        case 0:
+                            role = 111;
+                            break;
+                        case 1:
+                            role = 110;
+                            break;
+
+                        case 2:
+                            role = 100;
+                            break;
+
+                    }
+                }
+
+                else
+                {
+                    role = 000;
+                }
+
+
+                String[] atributos = { vm.Matricula.ToString(), vm.Nome.ToString().ToUpper(),vm.Login,vm.Password.ToString(), role.ToString(), vm.Subject.ToString() };
+                if(fDAO.selectWhere(0, "matricula_funcionario = " + atributos[0]).Tables[0].Rows.Count != 0)
+                {
+                    if(fDAO.create(atributos, 3) == 1)
+                    {
+
+                    }
+                }
+
+                else
+                {
+                    
+                }
+
+                return View();
+               
+            }
         }
 
         [Authorize]

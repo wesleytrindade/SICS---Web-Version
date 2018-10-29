@@ -63,13 +63,13 @@
         <div class="form-group">
             @Html.LabelFor(model => model.SelectedRole, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.SelectedRole, Model.listRoles)
+                @Html.DropDownListFor(model => model.SelectedRole, Model.listRoles,htmlAttributes: new { @id = "lista",@onchange = "hideSubject()" })
                 @Html.ValidationMessageFor(model => model.SelectedRole)
             </div>
         </div>
 
 
-        <div class="form-group">
+        <div class="form-group" id="Subject" hidden>
             @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Subject)
@@ -87,7 +87,20 @@
 }
 
 
+<script>
 
+    function hideSubject() {
+        var x = document.getElementById("lista").value;
+        if (x == 4) {
+            document.getElementById("Subject").hidden = false;
+        }
+
+        else {
+            document.getElementById("Subject").hidden = true;
+        }
+    }
+
+</script>
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

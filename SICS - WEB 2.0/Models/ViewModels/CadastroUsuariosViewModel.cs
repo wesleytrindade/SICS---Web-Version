@@ -12,7 +12,7 @@ namespace SICS___WEB_2._0.Models.ViewModels
         [Display(Name = "Nº Matrícula")]
         [Required(ErrorMessage = "O campo matrícula é obrigatório", AllowEmptyStrings = false)]
         [RegularExpression("^[0-9]*$",ErrorMessage = "O valor da matrícula deve ser numérico!")]
-        public int Matricula { get; set; }
+        public String Matricula { get; set; }
         [Display(Name = "Nome Completo")]
         [Required(ErrorMessage = "O campo nome é obrigatório", AllowEmptyStrings = false)]
         [MinLength(5,ErrorMessage = "O campo nome deve ter no mínimo 5 caracteres!")]
@@ -36,7 +36,7 @@ namespace SICS___WEB_2._0.Models.ViewModels
         [Required(ErrorMessage = "Selecione um nível de acesso!")]
         public int SelectedRole { get; set; }
         public SelectList listRoles { get; set; }
-        [HiddenInput(DisplayValue = false)]
+        [Display(Name = "Disciplina")]
         public String Subject { get; set; }
     }
 }

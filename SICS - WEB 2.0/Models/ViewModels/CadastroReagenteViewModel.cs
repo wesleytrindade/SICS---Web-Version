@@ -11,7 +11,6 @@ namespace SICS___WEB_2._0.Models.ViewModels
 
     public class CadastroReagenteViewModel
     {
-        public List<Orgao> _itemOrgao;
         [Required(ErrorMessage = "Informe o Nome!", AllowEmptyStrings = false)]
         [MaxLength(100,ErrorMessage = "O nome deve ter até 100 caracteres!")]
         [MinLength(5, ErrorMessage = "O nome deve no mínimo 5 caracteres!")]
@@ -29,15 +28,12 @@ namespace SICS___WEB_2._0.Models.ViewModels
         [Display(Name = "Grupo de Reagentes")]
         [Required(ErrorMessage = "Selecione um grupo!")]
         public String GrupoSelecionado { get; set; }
-        public SelectList Grupo { get; set; }
+        public List<SelectListItem> Grupo { get; set; }
         [Display(Name = "Reagente Controlado?")]
         public bool Controlado { get; set; }
-        [Display(Name = "")]
+        [Display(Name = "Orgão Regulador")]
         public int OrgaoSelecionado { get; set; }
-        public IEnumerable<SelectListItem> listOrgao
-        {
-            get { return new SelectList(_itemOrgao, "ID", "Nome"); }
-        }
+        public List <SelectListItem> listOrgao { get; set; }
 
     }
 }

@@ -5,19 +5,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>CadastroReagentes</h2>
 
+
+<div class="featurette-divider" id="divisor">
+    
+    <h2 style="color:white"> Cadastro de Reagentes</h2>
+</div>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
-<div class="form-horizontal">
-    <h4>CadastroReagenteViewModel</h4>
-    <hr />
+
+<div class="form-horizontal" id="formulario">
+    
     @Html.ValidationSummary(true)
     <div class="form-group">
-        @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Nome)
             @Html.ValidationMessageFor(model => model.Nome)
@@ -25,7 +29,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.CAS, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.CAS, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.CAS)
             @Html.ValidationMessageFor(model => model.CAS)
@@ -33,7 +37,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Teor, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Teor, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Teor)
             @Html.ValidationMessageFor(model => model.Teor)
@@ -41,7 +45,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Formula, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Formula, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Formula)
             @Html.ValidationMessageFor(model => model.Formula)
@@ -49,20 +53,30 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Controlado, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.GrupoSelecionado, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
         <div class="col-md-10">
-            @Html.CheckBoxFor(model => model.Controlado)
-            @Html.ValidationMessageFor(model => model.Controlado)
+            @Html.DropDownListFor(model => model.GrupoSelecionado, new SelectList(Model.Grupo, "Value", "Text"))
+            @Html.ValidationMessageFor(model => model.GrupoSelecionado)
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.OrgaoSelecionado, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Controlado, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.OrgaoSelecionado, Model.listOrgao))
+            @Html.CheckBoxFor(model => model.Controlado, htmlAttributes: new { @id = "chkcontrolado", @onchange = "checaCheckBox()" })
+            @Html.ValidationMessageFor(model => model.Controlado)
+        </div>
+    </div>
+
+    <div class="form-group" id="droporgao" hidden>
+        @Html.LabelFor(model => model.OrgaoSelecionado, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.OrgaoSelecionado, new SelectList(Model.listOrgao, "Value", "Text"))
             @Html.ValidationMessageFor(model => model.OrgaoSelecionado)
         </div>
     </div>
+
+
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
@@ -72,7 +86,20 @@
 </div>
 }
 
+<script>
+    function checaCheckBox() {
+        var v = document.getElementById("chkcontrolado").checked;
+        if (v == true) {
 
+            document.getElementById("droporgao").hidden = false;
+        }
+
+        else {
+
+            document.getElementById("droporgao").hidden = true;
+        }
+    }
+</script>
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
