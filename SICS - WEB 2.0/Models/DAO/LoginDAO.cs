@@ -46,15 +46,19 @@ namespace SICS___WEB_2._0.Models.DAO
             return fun;
         }
 
-        private void verificaConexao()
+        private int verificaConexao()
         {
             Connection cn = new Connection();
             
             if(cn.statusconexao()!=1)
             {
-                cn.conecta();
+                 return cn.conecta();
             }
 
+            else
+            {
+                return 1;
+            }
             
         }
     }
