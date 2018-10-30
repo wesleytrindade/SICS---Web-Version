@@ -8,6 +8,8 @@
 <link href="@Url.Content("~/css/bootstrap.min.css")" rel="stylesheet">
 
 
+<title> SICS - Acesso ao Sistema</title>
+
 <body id="LoginForm">
 
     @if (Model != null && Model.invalidCredentials)
@@ -73,8 +75,6 @@
 
 
                     <br />
-
-                    <div>@Html.CheckBoxFor(a => a.Lembrar, "")Lembrar-me</div>
                     <button type="submit" class="btn btn-primary" id="enviar"> Entrar</button>
                 }
 
@@ -88,8 +88,6 @@
             $("#invalidModal").modal();
             
         }
-            
-
         
     </script>
 

@@ -22,7 +22,7 @@ namespace SICS___WEB_2._0.Models.DAO
             if (ds.Tables[0].Rows.Count > 0)
             {
                 lg.ID = int.Parse(ds.Tables[0].Rows[0]["id_login"].ToString());
-                lg.Funcionario = int.Parse(ds.Tables[0].Rows[0]["perm_login"].ToString());
+                lg.Role = ds.Tables[0].Rows[0]["perm_login"].ToString();
                 return lg;
             }
 

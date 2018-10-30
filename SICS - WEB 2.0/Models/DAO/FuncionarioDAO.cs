@@ -34,7 +34,7 @@ namespace SICS___WEB_2._0.Models.DAO
            for(int a=0; a<values.Length;a++)
             {
                 values[a] = op.antiinject(values[a]);
-                if(values[a] == "")
+                if(values[a] == "" && a!=5)
                 {
                     return 3;
                 }
@@ -47,9 +47,9 @@ namespace SICS___WEB_2._0.Models.DAO
             attrFunc[1] = values[1];//nome
             attrFunc[2] = values[5]; //disciplina
 
-            op.setInsertAttr("controle_login", op.camposInsert[2], "'" + attrLogin[0] + "',md5('" + attrLogin[1] + "'),'" + attrLogin[2] + "'", tra);
+            op.setInsertAttr("controle_login", op.camposInsert[2], "'" + attrLogin[0] + "',md5('" + attrLogin[1] + "'),'" + attrLogin[2] + "',"+1, tra);
             op.setSelectQueryTransaction();
-            return op.setInsertAttr("controle_funcionario", op.camposInsert[10], attrFunc[0] + ",'" + attrFunc[1] + "',@valor," + null + ",'" + attrFunc[2] + "'");
+            return op.setInsertAttr("controle_funcionario", op.camposInsert[10], attrFunc[0] + ",'" + attrFunc[1] + "',"+"@valor"+","+ attrFunc[2] + "null,''",tra);
 
 
 

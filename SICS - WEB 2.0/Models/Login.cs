@@ -11,8 +11,6 @@ namespace SICS___WEB_2._0.Models
         [Key]
         public int ID { get; set; }
         [Required(AllowEmptyStrings = false)]
-        public int Funcionario { get; set; }
-        [Required(AllowEmptyStrings = false)]
         public String Role { get; set; }
     }
 }

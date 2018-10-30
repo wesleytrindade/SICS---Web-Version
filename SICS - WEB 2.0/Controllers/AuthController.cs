@@ -19,6 +19,11 @@ namespace SICS___WEB_2._0.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
+            if (Session.Count>0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 
@@ -41,7 +46,10 @@ namespace SICS___WEB_2._0.Controllers
                 Login lb = loginDAO.AutenticaUsuario(lg.Username, lg.Password);
                 if (lb != null)
                 {
-                    FormsAuthentication.SetAuthCookie(lg.Username, lg.Lembrar);
+                    FormsAuthentication.SetAuthCookie(lg.Username, false);
+                    Funcionario ff = loginDAO.userInformation(lb.ID);
+                    Session["Name"] = ff.Nome;
+                    Session["Role"] = lb.Role;
                     if (Url.IsLocalUrl(returnURl))
                     {
                         return Redirect(returnURl);
@@ -65,10 +73,14 @@ namespace SICS___WEB_2._0.Controllers
            
         }
 
-        public void Logout()
+        [Authorize]
+
+        public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            RedirectToAction("Login");
+            Session.Clear();
+            return RedirectToAction("Login","Auth");
+            
         }
     }
 }

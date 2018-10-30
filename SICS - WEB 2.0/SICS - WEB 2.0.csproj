@@ -267,6 +267,8 @@
     <Content Include="Views\Cadastro\SucessoModal.cshtml" />
     <Content Include="Views\Auth\InvalidModal.cshtml" />
     <Content Include="Views\Cadastro\Pedidos.cshtml" />
+    <Content Include="Views\Cadastro\Sucesso.cshtml" />
+    <Content Include="Views\Cadastro\Erro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -131,7 +131,7 @@ namespace SICS___WEB_2._0.Controllers
                 {
                     vm.Subject = "";
 
-                    switch(vm.SelectedRole)
+                    switch(vm.SelectedRole-1)
                     {
                         case 0:
                             role = 111;
@@ -154,28 +154,53 @@ namespace SICS___WEB_2._0.Controllers
 
 
                 String[] atributos = { vm.Matricula.ToString(), vm.Nome.ToString().ToUpper(),vm.Login,vm.Password.ToString(), role.ToString(), vm.Subject.ToString() };
-                if(fDAO.selectWhere(0, "matricula_funcionario = " + atributos[0]).Tables[0].Rows.Count != 0)
+                fDAO = new Models.DAO.FuncionarioDAO();
+                if(fDAO.selectWhere(0, "matricula_funcionario = " + atributos[0]).Tables[0].Rows.Count == 0)
                 {
                     if(fDAO.create(atributos, 3) == 1)
                     {
-
+                        return RedirectToAction("Sucesso");
                     }
                 }
 
                 else
                 {
-                    
+                    return RedirectToAction("Usuarios", "Cadastro");
                 }
 
-                return View();
+                
                
             }
+
+            return RedirectToAction("Erro","Cadastro");
         }
 
         [Authorize]
-        public ActionResult Solicitacoes()
+        public ActionResult Pedidos()
+        {
+
+            return View();
+        }
+
+        [Authorize]
+        public ActionResult Pedidos(int id_grupo)
         {
             return View();
         }
+
+        [Authorize]
+
+        public ActionResult Sucesso()
+        {
+            return View();
+        }
+
+        [Authorize]
+
+        public ActionResult Erro(String ErrorMessage)
+        {
+            return View(ErrorMessage);
+        }
+
     }
 }
