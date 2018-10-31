@@ -14,49 +14,57 @@ namespace SICS___WEB_2._0.Controllers
     {
         Models.DAO.GrupoDAO gDAO;
         Models.DAO.OrgaoDAO oDAO;
+        Models.DAO.FrascosDAO frDAO;
         Models.DAO.FuncionarioDAO fDAO;
         Models.DAO.Connection con;
 
         [Authorize]
         public ActionResult Reagentes()
         {
-            gDAO = new Models.DAO.GrupoDAO();
-            oDAO = new Models.DAO.OrgaoDAO();
-            
-            con = new Models.DAO.Connection();
-
-            if(con.statusconexao() != 1)
+            if (!(int.Parse(Session["Role"].ToString()) == 000))
             {
-                con.conecta();
-            }
-            var vmodel = new Models.ViewModels.CadastroReagenteViewModel();
-            DataTable dt = gDAO.select();
-            List<SelectListItem> ls = new List<SelectListItem>();
-            foreach (DataRow item in dt.Rows)
-            {
-                SelectListItem sl = new SelectListItem();
-                sl.Text = item["desc_grupo"].ToString();
-                sl.Value = item["id_grupo"].ToString();
-                ls.Add(sl);
+                gDAO = new Models.DAO.GrupoDAO();
+                oDAO = new Models.DAO.OrgaoDAO();
 
+                con = new Models.DAO.Connection();
+
+                if (con.statusconexao() != 1)
+                {
+                    con.conecta();
+                }
+                var vmodel = new Models.ViewModels.CadastroReagenteViewModel();
+                DataTable dt = gDAO.select();
+                List<SelectListItem> ls = new List<SelectListItem>();
+                foreach (DataRow item in dt.Rows)
+                {
+                    SelectListItem sl = new SelectListItem();
+                    sl.Text = item["desc_grupo"].ToString();
+                    sl.Value = item["id_grupo"].ToString();
+                    ls.Add(sl);
+
+                }
+
+                DataTable dp = oDAO.select();
+                List<SelectListItem> la = new List<SelectListItem>();
+                foreach (DataRow item in dp.Rows)
+                {
+                    SelectListItem gr = new SelectListItem();
+                    gr.Value = item["id_orgao"].ToString();
+                    gr.Text = item["desc_orgao"].ToString();
+                    la.Add(gr);
+
+                }
+                vmodel.Grupo = ls;
+                vmodel.listOrgao = la;
+
+
+
+                return View(vmodel);
             }
 
-            DataTable dp = oDAO.select();
-            List<SelectListItem> la = new List<SelectListItem>();
-            foreach (DataRow item in dp.Rows)
-            {
-                SelectListItem gr = new SelectListItem();
-                gr.Value = item["id_orgao"].ToString();
-                gr.Text = item["desc_orgao"].ToString();
-                la.Add(gr);
 
-            }
-            vmodel.Grupo = ls;
-            vmodel.listOrgao = la;
-            
-           
-        
-            return View(vmodel);
+
+            return RedirectToRoute(new { controller = "Home", action = "Erro" ,id = 1 });
         }
 
         [Authorize]
@@ -80,37 +88,40 @@ namespace SICS___WEB_2._0.Controllers
         [Authorize]
         public ActionResult Usuario()
         {
-            List<Roles> rl = new List<Roles>();
-            rl.Add(new Roles() { ID = 1, Descricao = "Administrador" });
-            rl.Add(new Roles() { ID = 2, Descricao = "Coordenador de Laboratório" });
-            rl.Add(new Roles() { ID = 3, Descricao = "Auxiliar de Docente" });
-            rl.Add(new Roles() { ID = 4, Descricao = "Professor" });
-
-            var vumodel = new Models.ViewModels.CadastroUsuariosViewModel();
-            List<SelectListItem> li = new List<SelectListItem>();
-           
-
-            foreach(Roles it in rl)
+            if (int.Parse(Session["Role"].ToString()) == 111)
             {
-                if (it.ID == 1)
+                List<Roles> rl = new List<Roles>();
+                rl.Add(new Roles() { ID = 1, Descricao = "Administrador" });
+                rl.Add(new Roles() { ID = 2, Descricao = "Coordenador de Laboratório" });
+                rl.Add(new Roles() { ID = 3, Descricao = "Auxiliar de Docente" });
+                rl.Add(new Roles() { ID = 4, Descricao = "Professor" });
+
+                var vumodel = new Models.ViewModels.CadastroUsuariosViewModel();
+                List<SelectListItem> li = new List<SelectListItem>();
+
+
+                foreach (Roles it in rl)
                 {
-                    li.Add(new SelectListItem() { Value = it.ID.ToString(), Text = it.Descricao, Selected = true });
+                    if (it.ID == 1)
+                    {
+                        li.Add(new SelectListItem() { Value = it.ID.ToString(), Text = it.Descricao, Selected = true });
+                    }
+
+                    else
+                    {
+                        li.Add(new SelectListItem() { Value = it.ID.ToString(), Text = it.Descricao, Selected = false });
+                    }
                 }
 
-                else
-                {
-                    li.Add(new SelectListItem() { Value = it.ID.ToString(), Text = it.Descricao, Selected = false });
-                }
+                SelectList lx = new SelectList(li, "Value", "Text");
+                vumodel.listRoles = lx;
+
+                return View(vumodel);
+
             }
 
-            SelectList lx = new SelectList(li, "Value", "Text");
-            vumodel.listRoles = lx;
+            return RedirectToRoute(new { controller = "Home", action = "Erro", id = 1 });
 
-
-
-
-
-            return View(vumodel);
         }
 
         [Authorize]
@@ -195,12 +206,18 @@ namespace SICS___WEB_2._0.Controllers
             return View();
         }
 
-        [Authorize]
+      
 
-        public ActionResult Erro(String ErrorMessage)
+        
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public ActionResult Frascos(CadastroFrascoViewModel cvm)
         {
-            return View(ErrorMessage);
+            return View(cvm);
         }
+
 
     }
 }

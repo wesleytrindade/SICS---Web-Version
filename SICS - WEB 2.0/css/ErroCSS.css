@@ -1,0 +1,42 @@
+﻿#errorheader
+{
+    padding-top: 100px;
+    padding-left:600px;
+    border-bottom: 5px solid red;
+
+}
+
+#errorheader>h2
+{
+    font-family:Arial;
+    font-size:35px;
+    color: white;
+}
+
+#errorheader>img
+{
+    padding-top:15px;
+    padding-right:10px;
+    float:left;
+    width:auto;
+}
+
+#errorbody
+{
+    background-color:whitesmoke;
+    padding-bottom:500px;
+}
+
+    #errorbody > p {
+        color: red;
+        padding-top:50px;
+        padding-left: 500px;
+        font-family: Arial;
+        font-size:18px;
+    }
+
+ #botaovoltar
+ {
+     padding-top:150px;
+     padding-left:600px;
+ }

@@ -168,6 +168,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DAO\Connection.cs" />
+    <Compile Include="Models\DAO\FrascosDAO.cs" />
     <Compile Include="Models\DAO\GrupoDAO.cs" />
     <Compile Include="Models\DAO\OrgaoDAO.cs" />
     <Compile Include="Models\DAO\ReagenteDAO.cs" />
@@ -203,6 +204,7 @@
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\carousel.css" />
+    <Content Include="css\ErroCSS.css" />
     <Content Include="css\FormsCSS.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -268,7 +270,7 @@
     <Content Include="Views\Auth\InvalidModal.cshtml" />
     <Content Include="Views\Cadastro\Pedidos.cshtml" />
     <Content Include="Views\Cadastro\Sucesso.cshtml" />
-    <Content Include="Views\Cadastro\Erro.cshtml" />
+    <Content Include="Views\Home\Erro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

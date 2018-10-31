@@ -21,6 +21,7 @@ namespace SICS___WEB_2._0.Models.ViewModels
         public decimal frasco_estoque { get; set; }
         [Required]
         [Display(Name = "QTDE do Frasco(g)")]
+        [Range(100.00,99999.00,ErrorMessage = "O valor mínimo de cadastro é de 100g e o máximo é de 99999.00g!")]
         public decimal qtde_frasco { get; set; }
         [Display(Name = "Estoque Máximo(g)")]
         public decimal estoque_maximo { get; set; }

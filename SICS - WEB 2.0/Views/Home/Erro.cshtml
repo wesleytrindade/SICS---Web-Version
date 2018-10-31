@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Erro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+}
+
+ <link href="~/css/ErroCSS.css" rel="stylesheet" />
+
+
+    <div id="errorheader">
+    <img src="~/img/obj_img_errado.png" /> 
+    <h2> Erro</h2>
+    </div>
+
+<div id="errorbody">
+    <p>@ViewBag.ErrorMessage </p>
+    
+    <div id="botaovoltar">
+    <a href="~/Home/Index" class="btn btn-success"> Voltar a Home</a>
+    </div>
+</div>
+

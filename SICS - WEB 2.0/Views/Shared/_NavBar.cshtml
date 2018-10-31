@@ -84,7 +84,13 @@
                         <li class="nav-item">
                             <a href ="#" class="nav-item disabled"> Logado como: @Session["Name"].ToString() </a> </li>
                         <li class="nav-item" style="padding-right:50px">
-                            @Html.ActionLink("Sair", "Logout", "Auth",htmlAttributes: new {@style = "color:red" })</li>
+                               <!--
+                                //Html.ActionLink("Sair", "Logout", "Auth", htmlAttributes: new {//style = "color:red" })
+ 
+                                  -->
+
+                               <a href="~/Auth/Logout" style="color:red"> Sair</a>
+                        </li>
                         </ul>
                 </div>
             </div>

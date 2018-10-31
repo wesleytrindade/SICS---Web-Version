@@ -17,5 +17,21 @@ namespace SICS___WEB_2._0.Controllers
             cm.conecta();
             return View();
         }
+
+        [Authorize]
+
+        public ActionResult Erro(int id)
+        {
+            String ErrorMessage = "";
+
+            switch(id)
+            {
+                case 1:
+                    ErrorMessage = "Você não possui permissão para acessar essa página!";
+                    break;
+            }
+            ViewBag.ErrorMessage = ErrorMessage;
+            return View();
+        }
     }
 }

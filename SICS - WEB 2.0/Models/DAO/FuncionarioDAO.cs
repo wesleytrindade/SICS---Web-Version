@@ -49,7 +49,7 @@ namespace SICS___WEB_2._0.Models.DAO
 
             op.setInsertAttr("controle_login", op.camposInsert[2], "'" + attrLogin[0] + "',md5('" + attrLogin[1] + "'),'" + attrLogin[2] + "',"+1, tra);
             op.setSelectQueryTransaction();
-            return op.setInsertAttr("controle_funcionario", op.camposInsert[10], attrFunc[0] + ",'" + attrFunc[1] + "',"+"@valor"+","+ attrFunc[2] + "null,''",tra);
+            return op.setInsertAttr("controle_funcionario", op.camposInsert[10], attrFunc[0] + ",'" + attrFunc[1] + "',"+"@valor"+",null,'"+ attrFunc[2]+"'",tra);
 
 
 

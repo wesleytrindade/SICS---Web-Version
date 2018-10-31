@@ -5,64 +5,99 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Frascos</h2>
+<div class="featurette-divider" id="divisor">
 
-@using (Html.BeginForm()) 
+    <h2 style="color:white"> Cadastro de Fabricantes</h2>
+</div>
+
+@if (Model.listaReagente.Count > 0)
 {
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>CadastroFrascoViewModel</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-        <div class="form-group">
-            @Html.LabelFor(model => model.selectedReagente, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.selectedReagente)
-                @Html.ValidationMessageFor(model => model.selectedReagente)
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal" id="formulario">
+            @Html.ValidationSummary(true)
+            <div class="form-group">
+
+                @Html.LabelFor(model => model.selectedReagente, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.selectedReagente, new SelectList(Model.listaReagente, "Value", "Text"))
+                    @Html.ValidationMessageFor(model => model.selectedReagente)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.num_frasco, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.num_frasco)
+                    @Html.ValidationMessageFor(model => model.num_frasco)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.frasco_estoque, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.frasco_estoque)
+                    @Html.ValidationMessageFor(model => model.frasco_estoque)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.qtde_frasco, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.qtde_frasco, htmlAttributes: new { @id = "cadfrasco", @onchange = "verificaMaximo()" })
+                    @Html.ValidationMessageFor(model => model.qtde_frasco)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.estoque_maximo, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+                <div class="col-md-10">
+                    <input type="text" id="estoquemaximo" value="@Model.estoque_maximo.ToString()" disabled />
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Cadastrar" class="btn btn-default" />
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.num_frasco, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.num_frasco)
-                @Html.ValidationMessageFor(model => model.num_frasco)
-            </div>
-        </div>
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.frasco_estoque, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.frasco_estoque)
-                @Html.ValidationMessageFor(model => model.frasco_estoque)
-            </div>
-        </div>
+    <script>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.qtde_frasco, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.qtde_frasco)
-                @Html.ValidationMessageFor(model => model.qtde_frasco)
-            </div>
-        </div>
+        function verificaMaximo() {
+            var x = document.getElementById("cadfrasco");
+            var y = document.getElementById("estoquemaximo");
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.estoque_maximo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.estoque_maximo)
-                @Html.ValidationMessageFor(model => model.estoque_maximo)
-            </div>
-        </div>
+            if (x > y) {
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
+                alert("Valor do frasco superior ao estoque máximo!");
+                document.getElementById("cadfrasco").value = "";
+            }
+        }
+
+
+    </script>
+
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+else
+
+{
+    <script>
+
+        window.onload = semReagentes();
+        function semReagentes() {
+            alert("Não há reagentes cadastrados!");
+        }
+    </script>
+
+    
+}
+
+
+
