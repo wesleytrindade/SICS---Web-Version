@@ -206,9 +206,11 @@
     <Content Include="css\carousel.css" />
     <Content Include="css\ErroCSS.css" />
     <Content Include="css\FormsCSS.css" />
+    <Content Include="css\TableCSS.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="img\background.jpg" />
     <Content Include="img\iconeSICS.jpg" />
     <Content Include="img\obj_img_baixa.png" />
     <Content Include="img\obj_img_baixa2.png" />
@@ -265,12 +267,12 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Cadastro\Usuario.cshtml" />
     <Content Include="Views\Cadastro\Fabricante.cshtml" />
-    <Content Include="Views\Cadastro\Frascos.cshtml" />
     <Content Include="Views\Cadastro\SucessoModal.cshtml" />
     <Content Include="Views\Auth\InvalidModal.cshtml" />
     <Content Include="Views\Cadastro\Pedidos.cshtml" />
     <Content Include="Views\Cadastro\Sucesso.cshtml" />
     <Content Include="Views\Home\Erro.cshtml" />
+    <Content Include="Views\Cadastro\Frasco.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

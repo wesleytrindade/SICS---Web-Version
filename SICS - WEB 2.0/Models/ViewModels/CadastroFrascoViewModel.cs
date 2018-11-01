@@ -25,5 +25,16 @@ namespace SICS___WEB_2._0.Models.ViewModels
         public decimal qtde_frasco { get; set; }
         [Display(Name = "Estoque Máximo(g)")]
         public decimal estoque_maximo { get; set; }
+        [Required]
+        [Display(Name = "Validade Reagente")]
+        [DataType(DataType.DateTime,ErrorMessage = "Data Inválida!")
+        public DateTime validade { get; set; }
+        [Required(ErrorMessage = "Preencha o campo!",AllowEmptyStrings = false)]
+        [MinLength(5,ErrorMessage = "O campo deve rer no mínimo 5 caracteres")]
+        [MaxLength(80,ErrorMessage = "O campo deve ter no máximo 80 caracteres")]
+        [Display(Name = "Localização Reagente")]
+        public String localizacao { get; set; }
+
+
     }
 }

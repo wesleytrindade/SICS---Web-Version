@@ -24,10 +24,14 @@ namespace SICS___WEB_2._0.Models.DAO
 
         }
 
-        public DataSet selectList(int id)
+        public DataSet [] selectList(int id)
         {
-            DataSet dx = new DataSet();
-            return op.setSelectQuery("controle_tipo_grupo", "*","id_grupo = "+id);
+            DataSet [] dx = new DataSet[2];
+            dx [0] = op.setSelectQuery("controle_tipo_grupo", "*","id_grupo = "+id);
+            dx[1] = op.setSelectQuery("controle_tipo", "*", "grupo_id");
+
+            return dx;
+
         }
 
         

@@ -14,6 +14,7 @@ namespace SICS___WEB_2._0.Controllers
     {
         Models.DAO.GrupoDAO gDAO;
         Models.DAO.OrgaoDAO oDAO;
+        Models.DAO.ReagenteDAO rDAO;
         Models.DAO.FrascosDAO frDAO;
         Models.DAO.FuncionarioDAO fDAO;
         Models.DAO.Connection con;
@@ -70,7 +71,22 @@ namespace SICS___WEB_2._0.Controllers
         [Authorize]
         public ActionResult Frascos()
         {
-            return View();
+            var vmodel = new Models.ViewModels.CadastroFrascoViewModel();
+            rDAO = new Models.DAO.ReagenteDAO();
+            DataTable dt = rDAO.selectListReagente().Tables[0];
+
+            List<SelectListItem> ls = new List<SelectListItem>();
+
+            foreach(DataRow row in dt.Rows)
+            {
+                SelectListItem sl = new SelectListItem();
+                sl.Value = row["id_tipo"].ToString();
+                sl.Text = row["desc_tipo"].ToString();
+                ls.Add(sl);
+            }
+
+            vmodel.listaReagente = ls;
+            return View(vmodel);
         }
 
         [Authorize]
@@ -188,8 +204,7 @@ namespace SICS___WEB_2._0.Controllers
 
         [Authorize]
         public ActionResult Pedidos()
-        {
-
+        { 
             return View();
         }
 
@@ -216,6 +231,13 @@ namespace SICS___WEB_2._0.Controllers
         public ActionResult Frascos(CadastroFrascoViewModel cvm)
         {
             return View(cvm);
+        }
+
+        [Authorize]
+
+        public ActionResult Fabricante()
+        {
+            return View();
         }
 
 

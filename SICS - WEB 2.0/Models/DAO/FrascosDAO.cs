@@ -16,12 +16,14 @@ namespace SICS___WEB_2._0.Models.DAO
             op = new SICS___Acesso_ao_Banco_de_Dados.Operations();
         }
 
-        public DataSet [] select()
+       public int carregaNumFrascos(String id_reagente)
         {
-            DataSet [] dx = new DataSet[3];
-            dx[0] = op.setSelectQuery("controle_tipo,controle_reagente", "controle_tipo.desc_tipo,controle_tipo.teor_tipo", "controle_tipo.id_tipo = controle_reagente.desc_reagente");
-            return dx;
-            
+            return op.maximo(id_reagente);
+        }
+
+        public String createFrasco(ViewModels.CadastroFrascoViewModel vm)
+        {
+           
         }
     }
 }

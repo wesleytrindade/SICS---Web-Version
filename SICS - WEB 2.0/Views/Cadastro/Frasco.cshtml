@@ -5,17 +5,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="featurette-divider" id="divisor">
 
-    <h2 style="color:white"> Cadastro de Fabricantes</h2>
-</div>
 
 @if (Model.listaReagente.Count > 0)
 {
-    @using (Html.BeginForm())
+    <div class="featurette-divider" id="divisor">
+
+        <h2 style="color:white"> Cadastro de Reagentes</h2>
+    </div>
+
+    using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-
         <div class="form-horizontal" id="formulario">
             @Html.ValidationSummary(true)
             <div class="form-group">
@@ -52,6 +53,14 @@
             </div>
 
             <div class="form-group">
+                @Html.LabelFor(model => model.validade, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.validade, htmlAttributes: new { @id = "datavalidade", @onkeyup = "ajustaData(this)" })
+                    @Html.ValidationMessageFor(model => model.validade)
+                </div>
+            </div>
+
+            <div class="form-group">
                 @Html.LabelFor(model => model.estoque_maximo, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
                 <div class="col-md-10">
                     <input type="text" id="estoquemaximo" value="@Model.estoque_maximo.ToString()" disabled />
@@ -80,6 +89,15 @@
             }
         }
 
+        function ajustaData(d) {
+
+            if (d.value.lenght == 2 && d.keyCode() != ) {
+                d.value += '/';
+            }
+
+            else if
+        }
+
 
     </script>
 
@@ -93,10 +111,11 @@ else
         window.onload = semReagentes();
         function semReagentes() {
             alert("Não há reagentes cadastrados!");
+            window.location = "Reagentes";
         }
     </script>
 
-    
+
 }
 
 

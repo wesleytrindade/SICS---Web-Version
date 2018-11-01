@@ -11,14 +11,23 @@ namespace SICS___WEB_2._0.Models.DAO
     {
         SICS___Acesso_ao_Banco_de_Dados.Operations op;
 
+        public GrupoDAO()
+        {
+            op = new SICS___Acesso_ao_Banco_de_Dados.Operations();
+        }
         public DataTable select()
         {
-           op = new SICS___Acesso_ao_Banco_de_Dados.Operations();
+          
            DataSet ds = op.setSelectQuery("controle_tipo_grupo", "*");
            DataTable ax = ds.Tables[0];
 
           
            return ax;
+        }
+
+        public int create(String dsc_grupo)
+        {
+            return op.setInsertAttr("controle_tipo_grupo", "desc_grupo", dsc_grupo);
         }
 
 
