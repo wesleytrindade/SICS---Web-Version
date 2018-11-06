@@ -1,0 +1,71 @@
+﻿@model SICS___WEB_2._0.Models.ViewModels.ListarReagentesViewModel
+
+@{
+    ViewBag.Title = "ListarReagentes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class ="featurette-divider" id="listheader">
+
+    <h2> Lista de Reagentes</h2>
+
+</div>
+
+<link href="~/css/TableCSS.css" rel="stylesheet" />
+
+<div class="modal fade" id="modalReagente" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered"role="document">
+        <div class="modal-content" id="janelaModal">
+            <div class="modal-header">
+                <h5 class="modal-title" id="titulomodal">Descrição do Reagente</h5>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class ="container" id="listbody">
+
+<div id="tablecontainer">
+
+    <table>
+        <tr id="cabecalho">
+            <th>ID</th>
+            <th>Nome</th>
+            <th>CAS</th>
+            <th>Teor</th>
+            <th>Formula</th>
+            <th>Detalhes</th>
+        </tr>
+            
+            @foreach (var reagente in Model.listaReagentes)
+            {   <tr id="linhas">
+                <td> @reagente.ID</td>
+                <td> @reagente.Nome</td>
+                <td> @reagente.CAS</td>
+                <td> @reagente.Teor</td>
+                <td> @reagente.formula</td>
+                <td> <input type="button" class="btn btn-default" value="Detalhes" onclick="detalhesReagente()" /> </td>
+                </tr>
+            }
+
+           
+        </table>
+    </div>
+   
+    </div>
+
+<script>
+
+    function detalhesReagente() {
+
+        $("#modalReagente").modal();
+
+
+    }
+</script>

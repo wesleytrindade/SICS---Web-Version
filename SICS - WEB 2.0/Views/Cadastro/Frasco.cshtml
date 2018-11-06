@@ -11,112 +11,120 @@
 {
     <div class="featurette-divider" id="divisor">
 
-        <h2 style="color:white"> Cadastro de Reagentes</h2>
+        <h2 style="color:white"> Cadastro de Frascos</h2>
     </div>
 
-    using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        <div class="form-horizontal" id="formulario">
-            @Html.ValidationSummary(true)
-            <div class="form-group">
 
-                @Html.LabelFor(model => model.selectedReagente, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.selectedReagente, new SelectList(Model.listaReagente, "Value", "Text"))
-                    @Html.ValidationMessageFor(model => model.selectedReagente)
-                </div>
-            </div>
+  using(Html.BeginForm())
+  {
+            @Html.AntiForgeryToken()
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.num_frasco, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.num_frasco)
-                    @Html.ValidationMessageFor(model => model.num_frasco)
-                </div>
-            </div>
+    <div class="form-horizontal" id="formulario">
+        @Html.ValidationSummary(true)
+        <div class="form-group">
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.frasco_estoque, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.frasco_estoque)
-                    @Html.ValidationMessageFor(model => model.frasco_estoque)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.qtde_frasco, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.qtde_frasco, htmlAttributes: new { @id = "cadfrasco", @onchange = "verificaMaximo()" })
-                    @Html.ValidationMessageFor(model => model.qtde_frasco)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.validade, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.validade, htmlAttributes: new { @id = "datavalidade", @onkeyup = "ajustaData(this)" })
-                    @Html.ValidationMessageFor(model => model.validade)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.estoque_maximo, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
-                <div class="col-md-10">
-                    <input type="text" id="estoquemaximo" value="@Model.estoque_maximo.ToString()" disabled />
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Cadastrar" class="btn btn-default" />
-                    </div>
-                </div>
+            @Html.LabelFor(model => model.selectedReagente, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.selectedReagente, new SelectList(Model.listaReagente, "Value", "Text"), htmlAttributes: new { @id = "listareagentes", @onchange = "mudaGet()" })
+                @Html.ValidationMessageFor(model => model.selectedReagente)
             </div>
         </div>
 
-    }
 
-    <script>
+        <div class="form-group">
+            @Html.LabelFor(model => model.frasco_estoque, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.frasco_estoque, htmlAttributes: new { disabled = true })
+                @Html.ValidationMessageFor(model => model.frasco_estoque)
+            </div>
+        </div>
 
-        function verificaMaximo() {
-            var x = document.getElementById("cadfrasco");
-            var y = document.getElementById("estoquemaximo");
+        <div class="form-group">
+            @Html.LabelFor(model => model.qtde_frasco, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.qtde_frasco, htmlAttributes: new { @id = "cadfrasco", @onchange = "verificaMaximo()" })
+                @Html.ValidationMessageFor(model => model.qtde_frasco)
+            </div>
+        </div>
 
-            if (x > y) {
+        <div class="form-group">
+            @Html.LabelFor(model => model.validade, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.validade, htmlAttributes: new { @id = "datavalidade", @placeholder = "dd/mm/aaaa", @value = DateTime.Today.ToString("dd/MM/yyyy") })
 
-                alert("Valor do frasco superior ao estoque máximo!");
-                document.getElementById("cadfrasco").value = "";
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.estoque_maximo, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.estoque_maximo, htmlAttributes: new { disabled = true })
+            </div>
+
+
+            <div class="form-group">
+
+                @Html.LabelFor(model => model.selectedFabricante, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.selectedFabricante, new SelectList(Model.listaFabricantes, "Value", "Text"))
+                    @Html.ValidationMessageFor(model => model.selectedFabricante)
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Cadastrar" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+        <script>
+
+            function verificaMaximo() {
+                var x = document.getElementById("cadfrasco");
+                var y = document.getElementById("estoquemaximo");
+
+                if (x > y) {
+
+                    alert("Valor do frasco superior ao estoque máximo!");
+                    document.getElementById("cadfrasco").value = "";
+                }
             }
-        }
 
-        function ajustaData(d) {
+            function mudaGet() {
 
-            if (d.value.lenght == 2 && d.keyCode() != ) {
-                d.value += '/';
+
             }
 
-            else if
-        }
 
+        </script>
 
-    </script>
-
+  }
 }
+
 
 else
 
 {
-    <script>
+        <script>
 
-        window.onload = semReagentes();
-        function semReagentes() {
-            alert("Não há reagentes cadastrados!");
-            window.location = "Reagentes";
-        }
-    </script>
-
-
+            window.onload = semReagentes();
+          function semReagentes() {
+              alert("Não há reagentes cadastrados!");
+              window.location = "Reagentes";
+          
+        </script>
 }
+
+
+
+
 
 
 

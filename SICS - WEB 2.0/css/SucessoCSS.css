@@ -1,0 +1,36 @@
+﻿#sucessoheader {
+    padding-top: 100px;
+    padding-left: 600px;
+    border-bottom: 5px solid green;
+}
+
+    #sucessoheader > h2 {
+        font-family: Arial;
+        font-size: 35px;
+        color: white;
+    }
+
+    #sucessoheader > img {
+        padding-top: 15px;
+        padding-right: 10px;
+        float: left;
+        width: auto;
+    }
+
+#sucessobody {
+    background-color: whitesmoke;
+    padding-bottom: 500px;
+}
+
+    #sucessobody >p {
+        color: green;
+        padding-top: 50px;
+        padding-left: 700px;
+        font-family: Arial;
+        font-size: 20px;
+    }
+
+#botaovoltar {
+    padding-top: 150px;
+    padding-left: 600px;
+}

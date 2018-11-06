@@ -1,12 +1,25 @@
 ﻿
 @{
-    ViewBag.Title = "Sucesso";
+    ViewBag.Title = "SICS - Cadastro Efetuado com sucesso";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link href="~/css/SucessoCSS.css" rel="stylesheet" />
+
+<div id="sucessoheader">
+
 <h2>Sucesso</h2>
 
-<h3> Cadastro Efetuado com sucesso!</h3>
+</div>
 
-@Html.ActionLink("Retornar para a Home", "Index", "Home");
+<div id="sucessobody">
+
+    <p> Cadastro Efetuado com sucesso!</p>
+
+    <div id="botaovoltar">
+        <input type="button" href="Home/Index" class="btn btn-success" value="Retornar para a Home" />
+    </div>
+
+
+</div>
 

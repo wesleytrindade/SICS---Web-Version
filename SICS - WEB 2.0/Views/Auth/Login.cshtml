@@ -10,30 +10,39 @@
 
 <title> SICS - Acesso ao Sistema</title>
 
+
 <body id="LoginForm">
 
-    @if (Model != null && Model.invalidCredentials)
+    @if (Model != null && Model.invalidCredentials == true)
     {
-    <div class="modal fade" id="invalidModal" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"></span><span class="sr-only">Fechar</span></button>
-                    <h4 class="modal-title"> Erro</h4>
-                </div>
-
-                <div class=" modal-body">
-                    <p>Credenciais Incorretas</p>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+        <div class="modal fade" id="invalidModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content" id="janelaModal">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="titulomodal">Erro</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p> Credenciais Incorretas!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <script>
+            window.onload = exibeModal();
+
+            function exibeModal() {
+                alert("Credenciais inválidas");
+
+            }
+
+        </script>
 
     }
+
     <div class="container">
         <div class="login-form">
             <div class="main-div">
@@ -81,20 +90,4 @@
             </div>
         </div>
     </div>
-
-    <script>
-        window.onload = exibeModal();
-        function exibeModal() {
-            $("#invalidModal").modal();
-            
-        }
-        
-    </script>
-
-
-
-
-
-
-
 </body>

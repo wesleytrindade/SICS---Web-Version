@@ -36,7 +36,7 @@ namespace SICS___Acesso_ao_Banco_de_Dados
 
         */
 
-        public readonly String[] camposInsert = { "id_reagente_fk,id_frasco,frasco_estoque,medida_estoque", "desc_fabricante,telefone_fabricante,endereco_fabricante", "login_login,pwd_login,perm_login,status_conta", "desc_orgao", "id_reagente,qtde_pedida,id_pedido", "id_funcionario,data_pedido,motivo_pedido,data_aula,local_aula,status_pedido", "matricula_professor,nome_professor,disc_professor,login_professor", "desc_reagente,val_reagente,lote_reagente,localizacao_reagente,fabricante_reagente", "desc_tipo,teor_tipo,formula_tipo,cas_tipo,controlado_tipo,orgaocontrolador_tipo,grupo_id,minimo_estoque,maximo_estoque", "desc_grupo", "matricula_funcionario,nome_funcionario,login_funcionario,foto_funcionario,disc_professor" };
+        public readonly String[] camposInsert = { "id_reagente_fk,id_frasco,frasco_estoque", "desc_fabricante,telefone_fabricante,endereco_fabricante", "login_login,pwd_login,perm_login,status_conta", "desc_orgao", "id_reagente,qtde_pedida,id_pedido", "id_funcionario,data_pedido,motivo_pedido,data_aula,local_aula,status_pedido", "matricula_professor,nome_professor,disc_professor,login_professor", "desc_reagente,val_reagente,lote_reagente,localizacao_reagente,fabricante_reagente", "desc_tipo,teor_tipo,formula_tipo,cas_tipo,controlado_tipo,orgaocontrolador_tipo,grupo_id,minimo_estoque,maximo_estoque", "desc_grupo", "matricula_funcionario,nome_funcionario,login_funcionario,foto_funcionario,disc_professor" };
 
         private DataSet selectDatabase(String[] attr, int op)
         {

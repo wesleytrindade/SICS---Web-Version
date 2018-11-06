@@ -27,73 +27,90 @@ else
         @Html.AntiForgeryToken()
 
 
-        <div class="form-horizontal" id="formulario">
+<div class="form-horizontal" id="formulario">
 
-            @Html.ValidationSummary(true)
-            <div class="form-group">
-                @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Nome)
-                    @Html.ValidationMessageFor(model => model.Nome)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.CAS, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.CAS)
-                    @Html.ValidationMessageFor(model => model.CAS)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Teor, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Teor)
-                    @Html.ValidationMessageFor(model => model.Teor)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Formula, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Formula)
-                    @Html.ValidationMessageFor(model => model.Formula)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.GrupoSelecionado, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.GrupoSelecionado, new SelectList(Model.Grupo, "Value", "Text"))
-                    @Html.ValidationMessageFor(model => model.GrupoSelecionado)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Controlado, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
-                <div class="col-md-10">
-                    @Html.CheckBoxFor(model => model.Controlado, htmlAttributes: new { @id = "chkcontrolado", @onchange = func })
-                    @Html.ValidationMessageFor(model => model.Controlado)
-                </div>
-            </div>
-
-            <div class="form-group" id="droporgao" hidden>
-                @Html.LabelFor(model => model.OrgaoSelecionado, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.OrgaoSelecionado, new SelectList(Model.listOrgao, "Value", "Text"))
-                    @Html.ValidationMessageFor(model => model.OrgaoSelecionado)
-                </div>
-            </div>
-
-
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Cadastrar" class="btn btn-success" />
-                </div>
-            </div>
+    @Html.ValidationSummary(true)
+    <div class="form-group">
+        @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Nome)
+            @Html.ValidationMessageFor(model => model.Nome)
         </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CAS, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CAS)
+            @Html.ValidationMessageFor(model => model.CAS)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Teor, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Teor)
+            @Html.ValidationMessageFor(model => model.Teor)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Formula, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Formula)
+            @Html.ValidationMessageFor(model => model.Formula)
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.GrupoSelecionado, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.GrupoSelecionado, new SelectList(Model.Grupo, "Value", "Text"))
+            @Html.ValidationMessageFor(model => model.GrupoSelecionado)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.EstoqueMin, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.EstoqueMin, htmlAttributes: new { @id = "estoquemin",@onchange = "checaEstoqueMax()"})
+            @Html.ValidationMessageFor(model => model.EstoqueMin)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.EstoqueMax, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.EstoqueMax, htmlAttributes: new { @id = "estoquemax",@onchange = "checaEstoqueMax()",@value = "" })
+            @Html.ValidationMessageFor(model => model.EstoqueMax)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Controlado, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+        <div class="col-md-10">
+            @Html.CheckBoxFor(model => model.Controlado, htmlAttributes: new { @id = "chkcontrolado", @onchange = func })
+            @Html.ValidationMessageFor(model => model.Controlado)
+        </div>
+    </div>
+
+    <div class="form-group" id="droporgao" hidden>
+        @Html.LabelFor(model => model.OrgaoSelecionado, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.OrgaoSelecionado, new SelectList(Model.listOrgao, "Value", "Text"))
+            @Html.ValidationMessageFor(model => model.OrgaoSelecionado)
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Cadastrar" class="btn btn-success" />
+        </div>
+    </div>
+</div>
     }
 
 @if (Model.listOrgao.Count <= 0)
@@ -124,6 +141,26 @@ else
             else {
 
                 document.getElementById("droporgao").hidden = true;
+            }
+        }
+
+        function checaEstoqueMax() {
+
+            var estmin = document.getElementById("estoquemin").value;
+            var estmax = document.getElementById("estoquemax").value;
+            var soma = estmax - estmin
+
+            if ((estmin > estmax) && (estmin != "")) {
+
+                alert("O estoque mínimo não pode ser maior que o estoque máximo!");
+                document.getElementById("estoquemin").value = "";
+            }
+
+            if ((soma<500) && (estmin != "" && estmax != "")) {
+
+                alert("A diferença entre estoque mínimo e estoque máximo deve ser de no mínimo 500g!");
+                document.getElementById("estoquemin").value = "";
+
             }
         }
     </script>

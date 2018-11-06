@@ -32,13 +32,13 @@
                                         </a>
                                     </li>
 
-                                    <li>@Html.ActionLink("Adicionar Frasco", "Frascos", "Cadastro")</li>
+                                    <li>@Html.ActionLink("Adicionar Frasco", "Frasco", "Cadastro")</li>
                                     <li>@Html.ActionLink("Adicionar Fabricante", "Fabricante", "Cadastro")</li>
                                     <li>@Html.ActionLink("Adicionar Órgão Controlador", "Orgao", "Cadastro")</li>
                                     <li>@Html.ActionLink("Adicionar Local de Armazenamento ", "Local", "Cadastro")</li>
                                     <li class="divider disabled"></li>
                                     <li class="dropdown-header">Pesquisa</li>
-                                    <li>@Html.ActionLink("Listar Reagentes", "ListaReagentes", "Operacoes")</li>
+                                    <li>@Html.ActionLink("Listar Reagentes", "ListarReagentes", "Operacoes")</li>
                                     <li>@Html.ActionLink("Listar Fabricantes", "ListaReagentes", "Operacoes")</li>
                                     <li>@Html.ActionLink("Listar Órgãos Reguladores", "ListaReagentes", "Operacoes")</li>
                                     <li>@Html.ActionLink("Listar Frascos", "ListaReagentes", "Operacoes")</li>
@@ -51,13 +51,13 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Solicitações <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header"> Pedidos</li>
-                                <li>@Html.ActionLink("Solicitar Reagentes", "Pedidos", "Cadastrar")</li>
+                                <li>@Html.ActionLink("Solicitar Reagentes", "Pedidos", "Cadastro")</li>
                                 <li>@Html.ActionLink("Minhas Solicitações", "ListarSoli", "Operacoes")</li>
                                 @if (!(Convert.ToInt32(Session["Role"]) == 000))
                                 {
                                     <li class="divider"></li>
                                     <li class="dropdown-header"> Gerenciar Pedidos</li>
-                                    <li>@Html.ActionLink("Lista de Solicitações", "Pedidos", "Cadastrar")</li>
+                                    <li>@Html.ActionLink("Lista de Solicitações", "Pedidos", "Cadastro")</li>
                                 }
                             </ul>
                         </li>

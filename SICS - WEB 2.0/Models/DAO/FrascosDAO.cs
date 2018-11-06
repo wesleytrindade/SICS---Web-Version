@@ -21,9 +21,18 @@ namespace SICS___WEB_2._0.Models.DAO
             return op.maximo(id_reagente);
         }
 
-        public String createFrasco(ViewModels.CadastroFrascoViewModel vm)
+        public int createFrasco(ViewModels.CadastroFrascoViewModel vm)
         {
-           
+            op.setInsertAttr("controle_reagente", op.camposInsert[7], vm.selectedReagente.ToString() + ",'" + vm.validade.ToString("yyyy-MM-dd") + "','" + vm.lote + "','" + vm.localizacao + "'," + vm.selectedFabricante, 3);
+            op.setSelectQueryTransaction();
+            return op.setInsertAttr("controle_estoque", op.camposInsert[0], "@valor," + vm.num_frasco + "," + vm.qtde_frasco);
+            //desc_reagente,val_reagente,lote_reagente,localizacao_reagente,fabricante_reagente
+            //op.camposInsert[0]
+        }
+
+        public DataSet selectFrasco()
+        {
+           return  op.setSelectQuery("controle_reagente", "*");
         }
     }
 }

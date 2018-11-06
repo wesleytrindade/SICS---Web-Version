@@ -24,14 +24,19 @@ namespace SICS___WEB_2._0.Models.DAO
 
         }
 
-        public DataSet [] selectList(int id)
+        public DataSet selectList(int id)
         {
-            DataSet [] dx = new DataSet[2];
-            dx [0] = op.setSelectQuery("controle_tipo_grupo", "*","id_grupo = "+id);
-            dx[1] = op.setSelectQuery("controle_tipo", "*", "grupo_id");
+            DataSet dx = new DataSet();
+            dx = op.setSelectQuery("controle_tipo_grupo,controle_tipo", "controle_tipo.*","controle_tipo_grupo.id_grupo = "+id+" and controle_tipo.grupo_id = "+id);
+           
 
             return dx;
 
+        }
+
+        public int cadastraPedido(String [] atributos)
+        {
+            return 1;
         }
 
         

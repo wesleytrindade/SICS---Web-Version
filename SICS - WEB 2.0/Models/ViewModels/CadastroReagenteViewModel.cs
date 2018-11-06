@@ -29,6 +29,15 @@ namespace SICS___WEB_2._0.Models.ViewModels
         [Required(ErrorMessage = "Selecione um grupo!")]
         public String GrupoSelecionado { get; set; }
         public List<SelectListItem> Grupo { get; set; }
+        [Display(Name = "Estoque Mínimo (g)")]
+        [Required(ErrorMessage = "Campo obrigatório",AllowEmptyStrings = false)]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "O valor do estoque mínimo deve ser númerico!")]
+        [Range(100,999999999,ErrorMessage = "Número muito pequeno ou número inválido")]
+        public decimal EstoqueMin { get; set; }
+        [Display(Name = "Estoque Máximo(g)")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "O valor do estoque mínimo deve ser númerico!")]
+        [Required(ErrorMessage = "Campo obrigatório",AllowEmptyStrings = false)]
+        public decimal EstoqueMax { get; set; }
         [Display(Name = "Reagente Controlado?")]
         public bool Controlado { get; set; }
         [Display(Name = "Orgão Regulador")]

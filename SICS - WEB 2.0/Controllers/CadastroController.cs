@@ -16,12 +16,20 @@ namespace SICS___WEB_2._0.Controllers
         Models.DAO.OrgaoDAO oDAO;
         Models.DAO.ReagenteDAO rDAO;
         Models.DAO.FrascosDAO frDAO;
+        Models.DAO.FabricanteDAO faDAO;
         Models.DAO.FuncionarioDAO fDAO;
+        Models.DAO.PedidosDAO pDAO;
         Models.DAO.Connection con;
 
         [Authorize]
         public ActionResult Reagentes()
         {
+
+            if (Session.Count <= 0)
+            {
+                return RedirectToAction("Logout", "Auth");
+            }
+
             if (!(int.Parse(Session["Role"].ToString()) == 000))
             {
                 gDAO = new Models.DAO.GrupoDAO();
@@ -55,55 +63,164 @@ namespace SICS___WEB_2._0.Controllers
                     la.Add(gr);
 
                 }
-                vmodel.Grupo = ls;
+
                 vmodel.listOrgao = la;
-
-
-
+                vmodel.Grupo = ls;
                 return View(vmodel);
             }
 
 
 
-            return RedirectToRoute(new { controller = "Home", action = "Erro" ,id = 1 });
+            return RedirectToRoute(new { controller = "Home", action = "Erro", id = 1 });
         }
 
         [Authorize]
-        public ActionResult Frascos()
+        [HttpPost]
+
+        public ActionResult Reagentes(CadastroReagenteViewModel vm)
         {
+            String cont = null;
+            if (vm.Controlado == true)
+            {
+                cont = "Y";
+            }
+
+            else
+            {
+                cont = "N";
+            }
+            String[] atributos = { vm.Nome, vm.Teor, vm.Formula, vm.CAS, cont, vm.OrgaoSelecionado.ToString(), vm.GrupoSelecionado, vm.EstoqueMin.ToString(), vm.EstoqueMax.ToString() };
+            if (rDAO.createReagente(atributos) == 1)
+            {
+                return RedirectToAction("Sucesso");
+            }
+
+            else
+            {
+                return RedirectToRoute(new { controller = "Home", action = "Erro", id = 2 });
+            }
+
+        }
+
+        [Authorize]
+        public ActionResult Frasco()
+        {
+            if (Session.Count <= 0)
+            {
+                return RedirectToAction("Logout", "Auth");
+            }
+
             var vmodel = new Models.ViewModels.CadastroFrascoViewModel();
             rDAO = new Models.DAO.ReagenteDAO();
+            faDAO = new Models.DAO.FabricanteDAO();
+            frDAO = new Models.DAO.FrascosDAO();
             DataTable dt = rDAO.selectListReagente().Tables[0];
+            DataTable db = faDAO.selectFabricantes().Tables[0];
+            List<SelectListItem> lb = new List<SelectListItem>();
 
             List<SelectListItem> ls = new List<SelectListItem>();
 
-            foreach(DataRow row in dt.Rows)
+
+
+            foreach (DataRow row in dt.Rows)
             {
                 SelectListItem sl = new SelectListItem();
+                if (vmodel.selectedReagente != 0)
+                {
+                    sl.Selected = true;
+                }
                 sl.Value = row["id_tipo"].ToString();
                 sl.Text = row["desc_tipo"].ToString();
                 ls.Add(sl);
+
+
+            }
+
+            foreach (DataRow row in db.Rows)
+            {
+                SelectListItem dg = new SelectListItem();
+                dg.Value = row["id_fabricante"].ToString();
+                dg.Text = row["desc_fabricante"].ToString();
+                lb.Add(dg);
             }
 
             vmodel.listaReagente = ls;
+            vmodel.listaFabricantes = lb;
             return View(vmodel);
+
         }
+
+            public ActionResult Preencher(CadastroPedidosViewModel vmu)
+             {
+               if(vmu.selectlistGrupoID == 0)
+               {
+                List<SelectListItem> le = new List<SelectListItem>();
+                SelectListItem hd = new SelectListItem();
+                hd.Selected = true;
+                hd.Text = "Selecionar o grupo";
+                hd.Value = "0";
+                le.Add(hd);
+
+                vmu.listReagentes = le;
+                return PartialView("ReagentesListPartial", vmu);
+            }
+               pDAO = new Models.DAO.PedidosDAO();
+               DataTable dp = pDAO.selectList(vmu.selectlistGrupoID).Tables[0];
+
+              List<SelectListItem> ls = new List<SelectListItem>();
+               foreach (DataRow item in dp.Rows)
+               {
+                SelectListItem sl = new SelectListItem();
+                sl.Text = item["desc_tipo"].ToString();
+                sl.Value = item["id_tipo"].ToString();
+                ls.Add(sl);
+
+               }
+
+            vmu.listReagentes = ls;
+            return PartialView("ReagentesListPartial", vmu);
+
+        }
+            public PartialViewResult FrascosPartial(CadastroFrascoViewModel vmodel)
+            {
+
+             frDAO = new Models.DAO.FrascosDAO();
+             
+             return PartialView(vmodel);
+            }
+        
+    
+
+        
 
         [Authorize]
         public ActionResult Fabricantes()
         {
+            if (Session.Count <= 0)
+            {
+                return RedirectToAction("Logout", "Auth");
+            }
             return View();
         }
 
         [Authorize]
         public ActionResult OrgaoControlador()
         {
+            if (Session.Count <= 0)
+            {
+                return RedirectToAction("Logout", "Auth");
+            }
             return View();
         }
 
         [Authorize]
         public ActionResult Usuario()
         {
+            if (Session.Count <= 0)
+            {
+                return RedirectToAction("Logout", "Auth");
+            }
+
             if (int.Parse(Session["Role"].ToString()) == 111)
             {
                 List<Roles> rl = new List<Roles>();
@@ -146,6 +263,7 @@ namespace SICS___WEB_2._0.Controllers
 
         public ActionResult Usuario(CadastroUsuariosViewModel vm)
         {
+
             if(!ModelState.IsValid)
             {
                 return View(vm);
@@ -192,32 +310,53 @@ namespace SICS___WEB_2._0.Controllers
 
                 else
                 {
-                    return RedirectToAction("Usuarios", "Cadastro");
+                    return View(vm);
                 }
 
                 
                
             }
 
-            return RedirectToAction("Erro","Cadastro");
+            return RedirectToRoute(new { controller = "Home", action = "Erro", id = 2 });
         }
 
         [Authorize]
         public ActionResult Pedidos()
-        { 
-            return View();
+        {
+            if (Session.Count <= 0)
+            {
+                return RedirectToAction("Logout", "Auth");
+            }
+
+            gDAO = new Models.DAO.GrupoDAO();
+
+            var vumodel = new Models.ViewModels.CadastroPedidosViewModel();
+            List<SelectListItem> ls = new List<SelectListItem>();
+            DataTable dx = gDAO.select();
+
+            foreach (DataRow item in dx.Rows)
+            {
+                SelectListItem sl = new SelectListItem();
+                sl.Text = item["desc_grupo"].ToString();
+                sl.Value = item["id_grupo"].ToString();
+                ls.Add(sl);
+
+            }
+
+            vumodel.listGrupo = ls;
+            return View(vumodel);
         }
 
-        [Authorize]
-        public ActionResult Pedidos(int id_grupo)
-        {
-            return View();
-        }
 
         [Authorize]
 
         public ActionResult Sucesso()
         {
+            if (Session.Count <= 0)
+            {
+                return RedirectToAction("Logout", "Auth");
+            }
+
             return View();
         }
 
@@ -228,18 +367,30 @@ namespace SICS___WEB_2._0.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult Frascos(CadastroFrascoViewModel cvm)
+        public ActionResult Frasco(CadastroFrascoViewModel cvm)
         {
-            return View(cvm);
+            frDAO = new Models.DAO.FrascosDAO();
+
+            if (!ModelState.IsValid)
+            {
+                return View(cvm);
+            }
+
+            else
+            {
+                if(frDAO.createFrasco(cvm) == 1)
+                {
+                    return RedirectToAction("Sucesso");
+                }
+
+                else
+                {
+                    return RedirectToRoute(new { controller = "Home", action = "Erro", id = 2 });
+                }
+            }
         }
 
-        [Authorize]
-
-        public ActionResult Fabricante()
-        {
-            return View();
-        }
-
-
+       
+       
     }
 }

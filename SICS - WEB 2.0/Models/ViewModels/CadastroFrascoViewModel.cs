@@ -15,6 +15,9 @@ namespace SICS___WEB_2._0.Models.ViewModels
         [Display(Name = "Lista de Reagentes")]
         public int selectedReagente { get; set; }
         public List<SelectListItem> listaReagente { get; set; }
+        [Display(Name = "Lista de Fabricantes")]
+        public int selectedFabricante { get; set; }
+        public List<SelectListItem> listaFabricantes { get; set; }
         [Display(Name = "Número do Frasco")]
         public int num_frasco { get; set; }
         [Display(Name = "QTDE em Estoque(g)")]
@@ -27,13 +30,17 @@ namespace SICS___WEB_2._0.Models.ViewModels
         public decimal estoque_maximo { get; set; }
         [Required]
         [Display(Name = "Validade Reagente")]
-        [DataType(DataType.DateTime,ErrorMessage = "Data Inválida!")
+        [DataType(DataType.DateTime,ErrorMessage = "Data Inválida!")]
         public DateTime validade { get; set; }
         [Required(ErrorMessage = "Preencha o campo!",AllowEmptyStrings = false)]
         [MinLength(5,ErrorMessage = "O campo deve rer no mínimo 5 caracteres")]
         [MaxLength(80,ErrorMessage = "O campo deve ter no máximo 80 caracteres")]
         [Display(Name = "Localização Reagente")]
         public String localizacao { get; set; }
+        [Required(ErrorMessage ="Preencha o campo!",AllowEmptyStrings = false)]
+        [MinLength(5, ErrorMessage = "O campo deve rer no mínimo 5 caracteres")]
+        [Display(Name = "Lote Reagente")]
+        public String lote { get; set; }
 
 
     }

@@ -5,59 +5,75 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm()) 
+<div class="featurette-divider" id="divisor">
+
+    <h2 style="color:white"> Cadastro de Pedidos</h2>
+</div>
+
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
 
-        @Html.ValidationSummary(true)
-        <div class="form-group">
-            @Html.LabelFor(model => model.selectlistGrupoID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.selectlistGrupoID, new SelectList(Model.listGrupo, "Value", "Text"));
-                @Html.ValidationMessageFor(model => model.selectlistGrupoID)
-            </div>
-        </div>
+<div class="form-horizontal" id="formulario">
 
-        <table id="lista">
-            <tr id="cabecalho">
-            <th> Reagente</th>
-            <th> QTDE Pedida(g)</th>
-            </tr>
 
-        </table>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.dataHoraAula, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.dataHoraAula)
-                @Html.ValidationMessageFor(model => model.dataHoraAula)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.selectedClass, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.selectedClass)
-                @Html.ValidationMessageFor(model => model.selectedClass)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.observacoes, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.observacoes)
-                @Html.ValidationMessageFor(model => model.observacoes)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Cadastrar Frasco" class="btn btn-default" />
-            </div>
+    {
+    <div class="form-group">
+        @Html.LabelFor(model => model.selectlistGrupoID, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.selectlistGrupoID, new SelectList(Model.listGrupo, "Value", "Text"),htmlAttributes: new { @onchange = "submitAjax()" });
+            @Html.ValidationMessageFor(model => model.selectlistGrupoID)
         </div>
     </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.listReagentes, htmlAttributes: new { @class = "control-label col-md-2" ,@id = "labelform" })
+        <div class="col-md-10">
+           <div id="ListReagente">
+            @{Html.RenderAction("Preencher");}
+           </div>
+        </div>
+    </div>
+
+    <table id="lista">
+        <tr id="cabecalho">
+            <th> Reagente</th>
+            <th> QTDE Pedida(g)</th>
+        </tr>
+
+    </table>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.dataHoraAula, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.dataHoraAula)
+            @Html.ValidationMessageFor(model => model.dataHoraAula)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.selectedClass, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.selectedClass)
+            @Html.ValidationMessageFor(model => model.selectedClass)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.observacoes, htmlAttributes: new { @class = "control-label col-md-2" ,@id = "labelform" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.observacoes)
+            @Html.ValidationMessageFor(model => model.observacoes)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Cadastrar Frasco" class="btn btn-default" />
+        </div>
+    </div>
+</div>
 }
 
 
