@@ -80,6 +80,7 @@ namespace SICS___WEB_2._0.Controllers
         public ActionResult Reagentes(CadastroReagenteViewModel vm)
         {
             String cont = null;
+            rDAO = new Models.DAO.ReagenteDAO();
             if (vm.Controlado == true)
             {
                 cont = "Y";
@@ -100,6 +101,43 @@ namespace SICS___WEB_2._0.Controllers
                 return RedirectToRoute(new { controller = "Home", action = "Erro", id = 2 });
             }
 
+        }
+
+        [Authorize]
+
+        public ActionResult Orgao()
+        {
+            if (Session.Count <= 0)
+            {
+                return RedirectToAction("Logout", "Auth");
+            }
+
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Orgao(CadastroOrgaosViewModel vd)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(vd);
+
+            }
+
+            else
+            {
+                oDAO = new Models.DAO.OrgaoDAO();
+                if (oDAO.create(vd.OrgaoRegulador) == 1)
+                {
+                    return RedirectToRoute(new { controller = "Cadastro", action = "Sucesso" });
+                }
+
+                else
+                {
+                    return RedirectToRoute(new { controller = "Home", action = "Erro", id = 2 });
+                }
+            }
         }
 
         [Authorize]
@@ -194,13 +232,39 @@ namespace SICS___WEB_2._0.Controllers
         
 
         [Authorize]
-        public ActionResult Fabricantes()
+        public ActionResult Fabricante()
         {
             if (Session.Count <= 0)
             {
                 return RedirectToAction("Logout", "Auth");
             }
             return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+
+        public ActionResult Fabricante(CadastroFabricantesViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(vm);
+            }
+
+            else
+            {
+                faDAO = new Models.DAO.FabricanteDAO();
+                if (faDAO.createFabricante(vm.NomeFabricante, vm.TelefoneFabricante, vm.EnderecoFabricante) == 1)
+                {
+                    return RedirectToRoute(new { controller = "Cadastro", action = "Sucesso" });
+                }
+
+                else
+                {
+                    return RedirectToRoute(new { controller = "Home", action = "Erro", id = 2 });
+                }
+            }
+            
         }
 
         [Authorize]

@@ -1,0 +1,31 @@
+﻿@model SICS___WEB_2._0.Models.ViewModels.CadastroOrgaosViewModel
+
+@{
+    ViewBag.Title = "SICS - Cadastro Órgão Regulador";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal" id="formulario">
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(model => model.OrgaoRegulador, htmlAttributes: new { @class = "control-label col-md-2",@id = "labelform" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OrgaoRegulador)
+                @Html.ValidationMessageFor(model => model.OrgaoRegulador)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Cadastrar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+

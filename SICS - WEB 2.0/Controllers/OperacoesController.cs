@@ -27,6 +27,11 @@ namespace SICS___WEB_2._0.Controllers
         [Authorize]
         public ActionResult ListarReagentes()
         {
+            if (Session.Count <= 0)
+            {
+                return RedirectToAction("Logout", "Auth");
+            }
+
             var vm = new Models.ViewModels.ListarReagentesViewModel();
            
             rDAO = new Models.DAO.ReagenteDAO();
