@@ -1,5 +1,14 @@
 ﻿
 
+#formulario-top>div.form-group {
+    padding-bottom:20px;
+}
+#formulario-top {
+    padding-left: 300px;
+    padding-bottom:40px;
+    border-bottom: 3px dotted red;
+    background-color: whitesmoke;
+}
 #labelform
 {
     font-family: Arial;

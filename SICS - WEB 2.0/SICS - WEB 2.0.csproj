@@ -191,6 +191,7 @@
     <Compile Include="Models\Roles.cs" />
     <Compile Include="Models\ViewModels\CadastroFabricantesViewModel.cs" />
     <Compile Include="Models\ViewModels\CadastroFrascoViewModel.cs" />
+    <Compile Include="Models\ViewModels\CadastroGrupoViewModel.cs" />
     <Compile Include="Models\ViewModels\CadastroPedidosViewModel.cs" />
     <Compile Include="Models\ViewModels\CadastroReagenteViewModel.cs" />
     <Compile Include="Models\ViewModels\CadastroUsuariosViewModel.cs" />
@@ -280,7 +281,7 @@
     <Content Include="Views\Home\Erro.cshtml" />
     <Content Include="Views\Cadastro\Frasco.cshtml" />
     <Content Include="Views\Operacoes\ListarReagentes.cshtml" />
-    <Content Include="Views\Cadastro\ReagentesListPartial.cshtml" />
+    <Content Include="Views\Operacoes\DetalhesModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

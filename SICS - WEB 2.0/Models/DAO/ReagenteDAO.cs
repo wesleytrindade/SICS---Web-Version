@@ -19,7 +19,7 @@ namespace SICS___WEB_2._0.Models.DAO
         public DataSet selectListReagente()
         {
             DataSet dx = new DataSet();
-            dx = op.setSelectQuery("controle_tipo,controle_reagente", "controle_tipo.*", "controle_tipo.id_tipo = controle_reagente.desc_reagente");
+            dx = op.setSelectQuery("controle_tipo","*");
             return dx;
 
         }
@@ -27,9 +27,11 @@ namespace SICS___WEB_2._0.Models.DAO
         public DataSet selectListByGrupo(int id_grupo)
         {
             DataSet dx = new DataSet();
-            dx = op.setSelectQuery("controle_tipo,controle_reagente", "controle_tipo.id_tipo,controle_tipo.desc_tipo", "controle_tipo.id_tipo = controle_reagente.desc_reagente and controle_tipo.grupo_id =  "+id_grupo);
+            dx = op.setSelectQuery("controle_tipo", "*","grupo_id = "+id_grupo);
             return dx;
         }
+
+      
 
         public int createReagente(String [] attr)
         {
