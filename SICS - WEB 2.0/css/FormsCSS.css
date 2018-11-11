@@ -6,6 +6,7 @@
 #formulario-top {
     padding-left: 300px;
     padding-bottom:40px;
+    border-top: 3px dotted red;
     border-bottom: 3px dotted red;
     background-color: whitesmoke;
 }

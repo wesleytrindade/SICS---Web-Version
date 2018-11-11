@@ -22,7 +22,7 @@
 
     @if (Request.IsAuthenticated)
     {
-      @Html.Partial("_NavBar")
+        @Html.Partial("_NavBar")
 
     }
 
@@ -31,7 +31,13 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="@Url.Content("~/js/bootstrap.js")"></script>
+    <script src="@Url.Content("~/Scripts/inputmask/inputmask.js")"></script>
+    <script src ="@Url.Content("~/Scripts/inputmask/jquery.inputmask.js")"></script>
+    <script src="@Url.Content("~/Scripts/inputmask/inputmask.extensions.js")"></script>
+    <script src="@Url.Content("~/Scripts/inputmask/inputmask.date.extensions.js")"></script>
+    <script src="@Url.Content("~/Scripts/inputmask/inputmask.numeric.extensions.js")"></script>
 </body>
+
 
 
 </html>

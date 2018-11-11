@@ -31,6 +31,13 @@ namespace SICS___WEB_2._0.Models.DAO
             return dx;
         }
 
+        public DataSet selectReagentebyId(int id_reagente)
+        {
+            DataSet db = new DataSet();
+            db = op.setSelectQuery("controle_tipo,controle_tipo_grupo", "*", "controle_tipo.id_tipo = " + id_reagente+" and controle_tipo.grupo_id = controle_tipo_grupo.id_grupo" );
+            return db;
+        }
+
       
 
         public int createReagente(String [] attr)

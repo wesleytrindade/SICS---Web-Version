@@ -32,32 +32,32 @@ else
     @Html.ValidationSummary(true)
     <div class="form-group">
         @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Nome)
+        <div class="col-md-3">
+            @Html.TextBoxFor(model => model.Nome, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Nome)
         </div>
     </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.CAS, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.CAS)
+        <div class="col-md-2">
+            @Html.TextBoxFor(model => model.CAS, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.CAS)
         </div>
     </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.Teor, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Teor)
+        <div class="col-md-1">
+            @Html.TextBoxFor(model => model.Teor, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Teor)
         </div>
     </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.Formula, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Formula)
+        <div class="col-md-2">
+            @Html.TextBoxFor(model => model.Formula, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Formula)
         </div>
     </div>
@@ -65,31 +65,31 @@ else
 
     <div class="form-group">
         @Html.LabelFor(model => model.GrupoSelecionado, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.GrupoSelecionado, new SelectList(Model.Grupo, "Value", "Text"))
+        <div class="col-md-3">
+            @Html.DropDownListFor(model => model.GrupoSelecionado, new SelectList(Model.Grupo, "Value", "Text"), htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.GrupoSelecionado)
         </div>
     </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.EstoqueMin, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(model => model.EstoqueMin, htmlAttributes: new { @id = "estoquemin",@onchange = "checaEstoqueMax()"})
+        <div class="col-md-2">
+            @Html.TextBoxFor(model => model.EstoqueMin, htmlAttributes: new { @id = "estoquemin", @onchange = "checaEstoqueMax()", @class = "form-control" })
             @Html.ValidationMessageFor(model => model.EstoqueMin)
         </div>
     </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.EstoqueMax, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(model => model.EstoqueMax, htmlAttributes: new { @id = "estoquemax",@onchange = "checaEstoqueMax()",@value = "" })
+        <div class="col-md-2">
+            @Html.TextBoxFor(model => model.EstoqueMax, htmlAttributes: new { @id = "estoquemax",@onchange = "checaEstoqueMax()",@value = "",@class="form-control" })
             @Html.ValidationMessageFor(model => model.EstoqueMax)
         </div>
     </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.Controlado, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
-        <div class="col-md-10">
+        <div class="col-md-2">
             @Html.CheckBoxFor(model => model.Controlado, htmlAttributes: new { @id = "chkcontrolado", @onchange = func })
             @Html.ValidationMessageFor(model => model.Controlado)
         </div>
@@ -97,8 +97,8 @@ else
 
     <div class="form-group" id="droporgao" hidden>
         @Html.LabelFor(model => model.OrgaoSelecionado, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.OrgaoSelecionado, new SelectList(Model.listOrgao, "Value", "Text"))
+        <div class="col-md-3">
+            @Html.DropDownListFor(model => model.OrgaoSelecionado, new SelectList(Model.listOrgao, "Value", "Text"),htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.OrgaoSelecionado)
         </div>
     </div>
@@ -163,7 +163,8 @@ else
 
             }
         }
-    </script>
+        
+   </script>
 }
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>

@@ -37,7 +37,7 @@
                 <td> @reagente.CAS</td>
                 <td> @reagente.Teor</td>
                 <td> @reagente.formula</td>
-                <td> <input type="button" class="btn btn-default" value="Detalhes" onclick="detalhesReagente()" /> </td>
+                <td> <input type="button" class="btn btn-default" value="Detalhes" id="buttonTable" name="@reagente.ID" onclick="detalhesReagente(this.name)" /> </td>
                 </tr>
             }
 
@@ -49,9 +49,9 @@
 
 <script>
 
-    function detalhesReagente() {
+    function detalhesReagente(id) {
 
-        $("#janelaModal").load("DetalhesModal");
+        $("#janelaModal").load("DetalhesModal?id="+id);
         $("#janelaModal").modal();
 
 

@@ -33,9 +33,8 @@ namespace SICS___WEB_2._0.Models.ViewModels
         public decimal estoque_maximo { get; set; }
         [Required]
         [Display(Name = "Validade Reagente")]
-        [DataType(DataType.DateTime,ErrorMessage = "Data Inválida!")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy")]
-        public DateTime validade { get; set; }
+        public String validade { get; set; }
         [Required(ErrorMessage = "Preencha o campo!",AllowEmptyStrings = false)]
         [MinLength(5,ErrorMessage = "O campo deve rer no mínimo 5 caracteres")]
         [MaxLength(80,ErrorMessage = "O campo deve ter no máximo 80 caracteres")]

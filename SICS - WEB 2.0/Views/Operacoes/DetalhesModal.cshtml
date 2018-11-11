@@ -1,16 +1,24 @@
-﻿@model SICS___WEB_2._0.Models.ViewModels.ListarFrascosViewModel
-
+﻿@model SICS___WEB_2._0.Models.Reagente
 @{
     Layout = null;
 }
 
+    <link href="~/css/TableCSS.css" rel="stylesheet" />
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" id="janelaModal">
             <div class="modal-header">
                 <h5 class="modal-title" id="titulomodal">Descrição do Reagente</h5>
             </div>
-            <div class="modal-body">
-
+            <div class="modal-body" id="corpoModal">
+                <p>ID Reagente: @Model.ID</p>
+                <p>Nome: @Model.Nome </p>
+                <p>CAS: @Model.CAS</p>
+                <p>Teor: @Model.Teor </p>
+                <p>Fórmula: @Model.formula </p>
+                <p>Grupo: @ViewBag.Grupo </p>
+                <p>Controlado: @Model.controlado</p>
+                <p>Estoque Mínimo: @Model.estoqueminimo (g)</p>
+                <p>Estoque Máximo: @Model.estoquemaximo (g)</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>

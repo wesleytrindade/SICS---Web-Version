@@ -1,4 +1,13 @@
-﻿#titulomodal
+﻿#corpoModal>p
+{
+    font-family:Arial;
+    font-size:12px;
+    padding-top:10px;
+    text-align:center;
+    padding-left:20px;
+}
+
+#titulomodal
 {
     font-family:Arial;
     font-size:18px;
@@ -26,6 +35,16 @@
     border: 5px dotted red;
     
 }
+
+#tabelaped
+{
+    padding-left: 200px;
+    padding-right: 200px;
+    padding-top:200px;
+    padding-bottom: 500px;
+    background-color:lightgreen;
+}
+
 
 #tablecontainer
 {
@@ -59,7 +78,7 @@
     border-bottom: 2px solid black;
 }
 
-td {
+#cabecalho>td {
     padding: 30px;
 }
 
