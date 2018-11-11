@@ -83,5 +83,12 @@ namespace SICS___WEB_2._0.Controllers
         {
             return View();
         }
+
+        [Authorize]
+
+        public ActionResult DetalhesModal()
+        {
+            return View();
+        }
     }
 }
