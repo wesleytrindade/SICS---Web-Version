@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SICS___WEB_2._0.Models;
+using SICS___WEB_2._0.Models.ViewModels;
 using System.Data;
 
 namespace SICS___WEB_2._0.Controllers
@@ -112,6 +113,36 @@ namespace SICS___WEB_2._0.Controllers
             }
             
             return View();
+        }
+
+        [Authorize]
+
+        public ActionResult AtualizaUsuario()
+        {
+            return View();
+        }
+
+        [Authorize]
+
+        public ActionResult AtualizaUsuarioModal(int? id)
+        {
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+
+        public ActionResult AtualizaUsuarioModal(AtualizaUsuarioViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(vm);
+            }
+
+            else
+            {
+                return View(vm);
+            }
         }
     }
 }

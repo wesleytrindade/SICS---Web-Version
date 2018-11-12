@@ -42,7 +42,6 @@ else
 
 {
 
-
     using (Html.BeginForm("Frasco", "Cadastro", FormMethod.Get, htmlAttributes: new { @id = "busca" }))
     {
 
@@ -59,9 +58,10 @@ else
 
             <div class="form-group">
 
+                
                 @Html.LabelFor(model => model.selectedReagente, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
                 <div class="col-md-3">
-                    @Html.DropDownList("selectedReagente", new SelectList(Model.listaReagente, "Value", "Text"), htmlAttributes: new { @class = "form-control", @id = "listareagente", @onchange = "mudaGet()" })
+                    @Html.DropDownList("selectedReagente", new SelectList(Model.listaReagente, "Value", "Text"), htmlAttributes: new { @class = "form-control", @id = "listareagente", @onchange = "mudaGet()",@disabled = "true" })
                     @Html.ValidationMessageFor(model => model.listaReagente)
                 </div>
 
@@ -139,6 +139,19 @@ else
             function semReagentesf() {
                 alert("Não há reagentes neste grupo!");
                 document.getElementById("listareagente").disabled = true;
+            }
+        </script>
+    }
+
+    if(ViewBag.desativaReag == false)
+    {
+        <script>
+
+            window.onload = desativaReag();
+
+            function desativaReag() {
+
+                document.getElementById("listareagente").disabled = false;
             }
         </script>
     }

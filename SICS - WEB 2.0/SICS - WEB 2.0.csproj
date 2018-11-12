@@ -191,6 +191,7 @@
     <Compile Include="Models\Produtos.cs" />
     <Compile Include="Models\Reagente.cs" />
     <Compile Include="Models\Roles.cs" />
+    <Compile Include="Models\ViewModels\AtualizaUsuarioViewModel.cs" />
     <Compile Include="Models\ViewModels\CadastroFabricantesViewModel.cs" />
     <Compile Include="Models\ViewModels\CadastroFrascoViewModel.cs" />
     <Compile Include="Models\ViewModels\CadastroGrupoViewModel.cs" />
@@ -212,6 +213,7 @@
     <Content Include="css\carousel.css" />
     <Content Include="css\ErroCSS.css" />
     <Content Include="css\FormsCSS.css" />
+    <Content Include="css\PedidosCSS.css" />
     <Content Include="css\SucessoCSS.css" />
     <Content Include="css\TableCSS.css" />
     <Content Include="favicon.ico" />

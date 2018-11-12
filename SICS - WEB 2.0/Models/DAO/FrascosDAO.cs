@@ -34,5 +34,17 @@ namespace SICS___WEB_2._0.Models.DAO
         {
            return  op.setSelectQuery("controle_reagente", "*");
         }
+
+        public Double getEstoque(int id_tipo)
+        {
+            DataTable tabela = op.setSelectQuery("controle_estoque a,controle_reagente b, controle_tipo c", "a.frasco_estoque", "b.desc_reagente = " + id_tipo + " and b.id_reagente =  a.id_reagente_fk and b.desc_reagente = c.id_tipo").Tables[0];
+            double acumulador = 0;
+            foreach(DataRow item in tabela.Rows)
+            {
+                acumulador += Convert.ToDouble(item["frasco_estoque"]);
+            }
+
+            return acumulador;
+        }
     }
 }

@@ -26,6 +26,8 @@ namespace SICS___WEB_2._0.Models.ViewModels
         [Required]
         [Display(Name = "Sala de Aula")]
         public int selectedClass { get; set;}
+        [Display(Name = "Observações e Materiais de aula")]
+        [DataType(DataType.MultilineText)]
         public String observacoes { get; set; }
     }
 }

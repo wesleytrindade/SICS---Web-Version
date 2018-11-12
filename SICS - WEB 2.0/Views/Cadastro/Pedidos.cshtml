@@ -15,11 +15,13 @@
  @using(Html.BeginForm("Pedidos", "Cadastro", FormMethod.Get, htmlAttributes: new { @id = "formget" }))
  {
 
-    <div class="form-horizontal" id="formulario-top">
+    <input type="text" value="false" id="addToList" hidden />
+
+    <div class="form-horizontal" id="pedformulario-top">
         <div class="form-group">
             @Html.LabelFor(model => model.selectlistGrupoID, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
             <div class="col-md-3">
-                @Html.DropDownList("selectedGrupo", new SelectList(Model.listGrupo, "Value", "Text"), htmlAttributes: new { @onchange = "submitForm()" })
+                @Html.DropDownList("selectedGrupo", new SelectList(Model.listGrupo, "Value", "Text"), htmlAttributes: new { @onchange = "submitForm()",@class = "form-control" })
                 @Html.ValidationMessageFor(model => model.selectlistGrupoID)
             </div>
         </div>
@@ -27,28 +29,40 @@
             <div class="form-group">
             @Html.LabelFor(model => model.listReagentes, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
             <div class="col-md-3">
-                @Html.DropDownList("selectedReagente", new SelectList(Model.listGrupo, "Value", "Text"), htmlAttributes: new { @onchange = "submitForm()" })
+                @Html.DropDownList("selectedReagente", new SelectList(Model.listGrupo, "Value", "Text"), htmlAttributes: new { @onchange = "submitForm()",@class="form-control",@id = "reagList" })
                 @Html.ValidationMessageFor(model => model.selectlistGrupoID)
+            </div>
+
+            <div class="form-group" id="btnadiciona"> 
+                <input type="button" class="btn btn-success" value="Adicionar na Lista" onclick="criaItem()" />
             </div>
          </div>
         </div>
   
 }
 
+    <div class="container" id="pedReagentes">
 
-<div class="form-group" id="tabelaped">
-    <table>
-        <tr>
-            <th> Reagente</th>
-            <th> QTDE Pedida(g)</th>
-        </tr>
+        <h2 id="pedtitulotabela"> Lista de Reagentes</h2>
+        <div id="pedTabela">
+            <table id="scripttabela">
+                <tr class="pedCabecalho">
+                    <th></th>
+                    <th> Reagente</th>
+                    <th> QTDE Pedida(g)</th>
+                </tr>
 
-    </table>
-</div>
+                <tr class="pedLinhas">
+                    
+                </tr>
+
+            </table>
+        </div>
+    </div>
 
 @using (Html.BeginForm("Pedidos", "Cadastro", FormMethod.Post, htmlAttributes: new { @id = "formpost" }))
 { 
-    <div class="form-horizontal" id="formulario">
+    <div class="form-horizontal" id="pedFormulario">
     <div class="form-group">
         @Html.LabelFor(model => model.dataHoraAula, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
         <div class="col-md-10">
@@ -75,13 +89,23 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Cadastrar Frasco" class="btn btn-default" />
+            <input type="submit" value="Solicitar Reagentes" class="btn btn-default" />
         </div>
     </div>
    </div>
  }
 
-    <link href="~/css/TableCSS.css" rel="stylesheet" />
+<script>
+
+    function criaItem() {
+
+        document.getElementById("addToList").value = "true";
+        document.getElementById("formget").submit();
+        
+    }
+</script>
+
+    <link href="~/css/PedidosCSS.css" rel="stylesheet" />
 
 
 

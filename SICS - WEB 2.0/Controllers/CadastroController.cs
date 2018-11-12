@@ -21,6 +21,8 @@ namespace SICS___WEB_2._0.Controllers
         Models.DAO.PedidosDAO pDAO;
         Models.DAO.Connection con;
 
+        CadastroPedidosViewModel vumodelped;
+
         [Authorize]
         public ActionResult Reagentes()
         {
@@ -134,6 +136,7 @@ namespace SICS___WEB_2._0.Controllers
                 dx.Text = "Selecione um grupo";
                 dx.Value = "0";
                 dx.Selected = true;
+                ViewBag.desativaReag = true;
                 lg.Add(dx);
             }
 
@@ -172,7 +175,10 @@ namespace SICS___WEB_2._0.Controllers
 
                 else
                 {
+                    ViewBag.desativaReag = false;
                     ViewBag.semReagentes = false;
+                    if(selectedGrupo.HasValue && !selectedReagente.HasValue)
+                       selectedReagente = int.Parse(ls[0].Value);
                 }
             }
 
@@ -185,6 +191,11 @@ namespace SICS___WEB_2._0.Controllers
                 lb.Add(dg);
             }
 
+            if (selectedReagente.HasValue)
+            {
+                vmodel.frasco_estoque = Convert.ToDecimal(frDAO.getEstoque(selectedReagente.Value));
+            }
+           // vmodel.estoque_maximo = 
             vmodel.listaGrupo = lg;
             vmodel.listaReagente = ls;
             vmodel.listaFabricantes = lb;
@@ -348,30 +359,53 @@ namespace SICS___WEB_2._0.Controllers
         }
 
         [Authorize]
-        public ActionResult Pedidos()
+        public ActionResult Pedidos(bool? addToList,int? selectedGrupo, int? selectedReagente, float? qtdereagente)
         {
+           
             if (Session.Count <= 0)
             {
                 return RedirectToAction("Logout", "Auth");
             }
 
             gDAO = new Models.DAO.GrupoDAO();
+            rDAO = new Models.DAO.ReagenteDAO();
 
-            var vumodel = new Models.ViewModels.CadastroPedidosViewModel();
-            List<SelectListItem> ls = new List<SelectListItem>();
-            DataTable dx = gDAO.select();
-
-            foreach (DataRow item in dx.Rows)
+            if ((!addToList.HasValue)&&(!(selectedGrupo.HasValue) && !(selectedReagente.HasValue)) && !(qtdereagente.HasValue))
             {
-                SelectListItem sl = new SelectListItem();
-                sl.Text = item["desc_grupo"].ToString();
-                sl.Value = item["id_grupo"].ToString();
-                ls.Add(sl);
+                vumodelped = new Models.ViewModels.CadastroPedidosViewModel();
+                vumodelped.selectedReagentes = new DataTable();
+                vumodelped.selectedReagentes.Columns.Add("reagente_selecionado");
+                vumodelped.selectedReagentes.Columns.Add("qtde_reagente");
+            }
+                List<SelectListItem> ls = new List<SelectListItem>();
+                DataTable dx = gDAO.select();
+                DataTable dt = rDAO.selectListReagente().Tables[0];
 
+            if (!selectedGrupo.HasValue)
+            {
+                SelectListItem dp = new SelectListItem();
+                dp.Text = "Selecione um grupo";
+                dp.Value = "0";
+                dp.Selected = true;
+                ViewBag.desativaReag = true;
+                ls.Add(dp);
             }
 
-            vumodel.listGrupo = ls;
-            return View(vumodel);
+            foreach (DataRow item in dx.Rows)
+                {
+                    SelectListItem sl = new SelectListItem();
+                    sl.Text = item["desc_grupo"].ToString();
+                    sl.Value = item["id_grupo"].ToString();
+                    ls.Add(sl);
+
+                }
+
+               if(addToList == true)
+               {
+                vumodelped.selectedReagentes.Rows.Add(selectedReagente, qtdereagente);
+               }
+                vumodelped.listGrupo = ls;
+                return View(vumodelped);
         }
 
 

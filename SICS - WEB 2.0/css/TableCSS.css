@@ -38,8 +38,8 @@
 
 #tabelaped
 {
-    padding-left: 200px;
-    padding-right: 200px;
+    padding-left:200px;
+    padding-right:200px;
     padding-top:200px;
     padding-bottom: 500px;
     background-color:lightgreen;
@@ -51,6 +51,12 @@
     padding-left:200px;
     padding-right:200px;
     padding-bottom:500px;
+}
+
+#tabelaconta {
+    padding-left: 400px;
+    padding-right: 400px;
+    padding-bottom: 500px;
 }
 
 #cabecalho {
@@ -76,11 +82,16 @@
     border-left: 2px solid black;
     border-right: 2px solid black;
     border-bottom: 2px solid black;
+   
 }
 
-#cabecalho>td {
+#cabecalho>th {
     padding: 30px;
 }
+
+
+
+
 
 
 
