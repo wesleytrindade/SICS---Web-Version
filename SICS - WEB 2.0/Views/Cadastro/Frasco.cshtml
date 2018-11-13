@@ -99,7 +99,7 @@ else
             <div class="form-group">
                 @Html.LabelFor(model => model.validade, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
                 <div class="col-md-3">
-                    @Html.TextBoxFor(model => model.validade, htmlAttributes: new { @class = "form-control", @id = "validade", @placeholder = "dd/mm/aaaa", @value = DateTime.Now.ToString("dd/MM/yyyy") })
+                    @Html.TextBoxFor(model => model.validade, htmlAttributes: new { @class = "form-control", @id = "validade", @placeholder = "dd/mm/aaaa", @onchange = "ajustaData()" })
 
                 </div>
             </div>
@@ -176,11 +176,43 @@ else
 
         }
 
-        $(document).ready(function (){
+        function ajustaData() {
 
-            $("#validade").inputmask("mask", { "mask": "99/99/9999" });
-        });
+            var data = document.getElementById("validade").value;
+            var dia = data.substr(0, 2);
+            var mes = data.substr(4, 5);
+            var ano = data.substr(7, 11);
 
+            if (data.lenght == 2) {
+
+                if (dia < 31 && dia > 0) {
+                    document.getElementById("validade").value = data + "/";
+                }
+
+                else {
+
+                    dataInvalida();
+                }
+            }
+
+            else if (data.lenght == 5) {
+
+                campo.value = data + "/"
+            }
+
+            else if (data.lenght > 11) {
+
+                dataInvalida(campo);
+            }
+
+
+        }
+
+        function dataInvalida() {
+
+            alert("Data inválida!");
+            campo.value = "";
+        }
 
 
     </script>

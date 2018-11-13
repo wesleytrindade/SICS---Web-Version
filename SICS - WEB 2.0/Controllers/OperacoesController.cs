@@ -119,6 +119,11 @@ namespace SICS___WEB_2._0.Controllers
 
         public ActionResult AtualizaUsuario()
         {
+            if (Session.Count <= 0)
+            {
+                return RedirectToAction("Logout", "Auth");
+            }
+
             return View();
         }
 
@@ -126,6 +131,10 @@ namespace SICS___WEB_2._0.Controllers
 
         public ActionResult AtualizaUsuarioModal(int? id)
         {
+            if (!id.HasValue)
+            {
+                return RedirectToAction("AtualizaUsuario");
+            }
             return View();
         }
 

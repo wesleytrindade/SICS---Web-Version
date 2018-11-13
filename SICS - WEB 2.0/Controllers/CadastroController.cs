@@ -163,7 +163,7 @@ namespace SICS___WEB_2._0.Controllers
                         sl.Selected = true;
                     }
                     sl.Value = row["id_tipo"].ToString();
-                    sl.Text = row["desc_tipo"].ToString();
+                    sl.Text = row["desc_tipo"].ToString() + " " + row["teor_tipo"].ToString();
                     ls.Add(sl);
 
                 }
@@ -373,11 +373,12 @@ namespace SICS___WEB_2._0.Controllers
             if ((!addToList.HasValue)&&(!(selectedGrupo.HasValue) && !(selectedReagente.HasValue)) && !(qtdereagente.HasValue))
             {
                 vumodelped = new Models.ViewModels.CadastroPedidosViewModel();
-                vumodelped.selectedReagentes = new DataTable();
-                vumodelped.selectedReagentes.Columns.Add("reagente_selecionado");
-                vumodelped.selectedReagentes.Columns.Add("qtde_reagente");
+                vumodelped.selectedReagentes = new List<TableReagentes>();
+                vumodelped.listGrupo = new List<SelectListItem>();
+                vumodelped.listReagentes = new List<SelectListItem>();
             }
                 List<SelectListItem> ls = new List<SelectListItem>();
+                List<SelectListItem> lb = new List<SelectListItem>();
                 DataTable dx = gDAO.select();
                 DataTable dt = rDAO.selectListReagente().Tables[0];
 
@@ -400,11 +401,48 @@ namespace SICS___WEB_2._0.Controllers
 
                 }
 
+              if(selectedGrupo.HasValue)
+              {
+                dt = rDAO.selectListByGrupo(int.Parse(selectedGrupo.ToString())).Tables[0];
+                foreach (DataRow row in dt.Rows)
+                {
+                    SelectListItem sl = new SelectListItem();
+                    if (selectedReagente != 0)
+                    {
+                        sl.Selected = true;
+                    }
+                    sl.Value = row["id_tipo"].ToString();
+                    sl.Text = row["desc_tipo"].ToString() + " " + row["teor_tipo"].ToString();
+                    lb.Add(sl);
+
+                }
+
+                if (dt.Rows.Count == 0)
+                {
+                    ViewBag.semReagentes = true;
+                }
+
+                else
+                {
+                    ViewBag.desativaReag = false;
+                    ViewBag.semReagentes = false;
+                    if (selectedGrupo.HasValue && !selectedReagente.HasValue)
+                        selectedReagente = int.Parse(ls[0].Value);
+                }
+            }
+
+
                if(addToList == true)
                {
-                vumodelped.selectedReagentes.Rows.Add(selectedReagente, qtdereagente);
+                TableReagentes tb = new TableReagentes();
+                tb.ID = selectedReagente.Value;
+                tb.Nome = vumodelped.listReagentes[selectedReagente.Value].Text;
+                tb.valor = Convert.ToDecimal(qtdereagente.Value);
+                vumodelped.selectedReagentes.Add(tb);
                }
                 vumodelped.listGrupo = ls;
+                vumodelped.listReagentes = lb;
+                
                 return View(vumodelped);
         }
 

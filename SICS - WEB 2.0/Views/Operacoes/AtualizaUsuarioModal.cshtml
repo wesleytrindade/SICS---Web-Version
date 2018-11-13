@@ -1,0 +1,52 @@
+﻿@model SICS___WEB_2._0.Models.ViewModels.AtualizaUsuarioViewModel
+
+
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content" id="janelaModal">
+        <div class="modal-header">
+            <h5 class="modal-title" id="titulomodal">Descrição do Reagente</h5>
+        </div>
+        <div class="modal-body" id="corpoModal">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                 
+                    @Html.ValidationSummary(true)
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.id_usuario, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.id_usuario)
+                            @Html.ValidationMessageFor(model => model.id_usuario)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.nome)
+                            @Html.ValidationMessageFor(model => model.nome)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
+         </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+        </div>
+
+    </div>
+   </div>
+   
+
+
+
+

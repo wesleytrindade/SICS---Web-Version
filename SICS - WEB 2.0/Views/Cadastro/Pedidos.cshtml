@@ -11,8 +11,20 @@
 </div>
 
 
+@if (ViewBag.semReagentes == true)
 
- @using(Html.BeginForm("Pedidos", "Cadastro", FormMethod.Get, htmlAttributes: new { @id = "formget" }))
+{
+    <script>
+        alert("Sem reagentes cadastrados!");
+        window.location = "Reagentes";
+     </script>
+}
+
+else
+
+{
+
+ using (Html.BeginForm("Pedidos", "Cadastro", FormMethod.Get, htmlAttributes: new { @id = "formget" }))
  {
 
     <input type="text" value="false" id="addToList" hidden />
@@ -21,7 +33,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.selectlistGrupoID, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
             <div class="col-md-3">
-                @Html.DropDownList("selectedGrupo", new SelectList(Model.listGrupo, "Value", "Text"), htmlAttributes: new { @onchange = "submitForm()",@class = "form-control" })
+                @Html.DropDownList("selectedGrupo", new SelectList(Model.listGrupo, "Value", "Text"), htmlAttributes: new { @onchange = "submitForm()", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.selectlistGrupoID)
             </div>
         </div>
@@ -29,7 +41,7 @@
             <div class="form-group">
             @Html.LabelFor(model => model.listReagentes, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
             <div class="col-md-3">
-                @Html.DropDownList("selectedReagente", new SelectList(Model.listGrupo, "Value", "Text"), htmlAttributes: new { @onchange = "submitForm()",@class="form-control",@id = "reagList" })
+                @Html.DropDownList("selectedReagente", new SelectList(Model.listReagentes, "Value", "Text"), htmlAttributes: new { @onchange = "submitForm()", @class = "form-control", @id = "reagList" })
                 @Html.ValidationMessageFor(model => model.selectlistGrupoID)
             </div>
 
@@ -38,8 +50,8 @@
             </div>
          </div>
         </div>
-  
-}
+
+ }
 
     <div class="container" id="pedReagentes">
 
@@ -52,16 +64,22 @@
                     <th> QTDE Pedida(g)</th>
                 </tr>
 
+                @foreach (var linha in Model.selectedReagentes)
+                {
                 <tr class="pedLinhas">
+                    <td> <input type="radio" value="@linha.ID" /></td>
+                    <td> @linha.Nome</td>
+                    <td>@linha.valor</td>
                     
                 </tr>
+                }
 
             </table>
         </div>
     </div>
 
-@using (Html.BeginForm("Pedidos", "Cadastro", FormMethod.Post, htmlAttributes: new { @id = "formpost" }))
-{ 
+using (Html.BeginForm("Pedidos", "Cadastro", FormMethod.Post, htmlAttributes: new { @id = "formpost" }))
+{
     <div class="form-horizontal" id="pedFormulario">
     <div class="form-group">
         @Html.LabelFor(model => model.dataHoraAula, htmlAttributes: new { @class = "control-label col-md-2", @id = "labelform" })
@@ -93,7 +111,7 @@
         </div>
     </div>
    </div>
- }
+}
 
 <script>
 
@@ -103,9 +121,14 @@
         document.getElementById("formget").submit();
         
     }
+
+    function submitForm() {
+        document.getElementById("formget").submit();
+    }
 </script>
 
     <link href="~/css/PedidosCSS.css" rel="stylesheet" />
 
+}
 
 

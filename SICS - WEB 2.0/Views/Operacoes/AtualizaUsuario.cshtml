@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "AtualizaUsuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="featurette-divider" id="divisor">
+
+    <h2 style="color:white"> Atualizar Dados do Usuário</h2>
+</div>
+
+<div class="form-group" id="formulario">
+
+    @Html.Label("Digite o código de matrícula do usuario", htmlAttributes: new { @class = "control-label col-md-2" })
+   <div class="col-md-3">
+       <input type="text" id="valor" class="form-control" placeholder="Código de Matrícula" />
+   </div>
+
+    <input type="button" class="btn btn-success" value="Enviar" onclick="dadosUsuario()" />
+</div>
+
+
+<div class="modal fade" id="modalUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+</div>
+
+<script>
+
+    function dadosUsuario() {
+
+        var x = document.getElementById("valor").value;
+        $("#modalUser").load("AtualizaDadosModal?id = " + x);
+        $("modalUser").modal();
+
+
+    }
+</script>
+
